@@ -66,13 +66,13 @@ void JImageObject::FadeOut()
 /// 
 /// </summary>
 /// <returns></returns>
-bool JButtenObject::Frame()
+bool JButtonObject::Frame()
 {
 	JDxObject::Frame();
 	return true;
 }
 
-bool JButtenObject::Render()
+bool JButtonObject::Render()
 {
 	JDxObject::Render();
 	return true;

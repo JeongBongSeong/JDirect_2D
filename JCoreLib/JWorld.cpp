@@ -1,4 +1,5 @@
 #include "JWorld.h"
+#include "JObjectMgr.h"
 JWorld* JWorld::m_pWorld = nullptr;
 
 bool JWorld::Load(std::wstring saveFile)
@@ -19,6 +20,14 @@ bool JWorld::Frame()
 			pObj->Frame();
 		}
 	}
+	for (auto obj : m_NpcObj)
+	{
+		JObject2D* pObj = obj.second;
+		if (pObj != nullptr)
+		{
+			pObj->Frame();
+		}
+	}
 	return true;
 }
 bool JWorld::Render()
@@ -27,6 +36,14 @@ bool JWorld::Render()
 	{
 		JObject2D* pObj = obj.second;
 		if (pObj != nullptr)
+		{
+			pObj->Render();
+		}
+	}
+	for (auto obj : m_NpcObj)
+	{
+		JObject2D* pObj = obj.second;
+		if (pObj->m_bDead == false)
 		{
 			pObj->Render();
 		}

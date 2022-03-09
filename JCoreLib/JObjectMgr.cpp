@@ -57,7 +57,7 @@ bool JObjectMgr::Frame()
 	for (auto src : m_ObjectList)
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
-		if (pObjSrc->m_dwCollisionType == JCollisionType::Ignore) continue;
+		if (pObjSrc->m_dwCollisionType == JSelectType::Select_Ignore) continue;
 		DWORD dwState = JCollisionType::Overlap;
 		for (auto dest : m_ObjectList)
 		{
@@ -80,23 +80,23 @@ bool JObjectMgr::Frame()
 	for (auto src : m_SelectList)
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
-		if (pObjSrc->m_dwSelectType == JCollisionType::Ignore) continue;
+		if (pObjSrc->m_dwSelectType == JSelectType::Select_Ignore) continue;
 		DWORD dwState = JCollisionType::Overlap;
 		if (JCollision::RectToPoint(pObjSrc->m_rtCollision, (float)g_ptMouse.x, (float)g_ptMouse.y))
 		{
 			DWORD dwKeyState = JInput::Get().m_dwMouseState[0];
-				pObjSrc->m_dwSelectState = TSelectState::T_HOVER;
-				if (dwKeyState == KEY_PUSH)
-				{
-					pObjSrc->m_dwSelectState = TSelectState::T_ACTIVE;
-				}
+				pObjSrc->m_dwSelectState = JSelectState::J_HOVER;
+			if (dwKeyState == KEY_PUSH)
+			{
+				pObjSrc->m_dwSelectState = JSelectState::J_ACTIVE;
+			}
 			if (dwKeyState == KEY_HOLD)
 			{
-				pObjSrc->m_dwSelectState = TSelectState::T_FOCUS;
+				pObjSrc->m_dwSelectState = JSelectState::J_FOCUS;
 			}
 			if (dwKeyState == KEY_UP)
 			{
-				pObjSrc->m_dwSelectState = TSelectState::T_SELECTED;
+				pObjSrc->m_dwSelectState = JSelectState::J_SELECTED;
 			}
 
 			FunctionIterator colliter = m_fnSelectExecute.find(pObjSrc->m_iSelectID);
@@ -105,6 +105,10 @@ bool JObjectMgr::Frame()
 				CollisionFunction call = colliter->second;
 				call(pObjSrc, dwState);
 			}
+		}
+		else
+		{
+			pObjSrc->m_dwSelectState = JSelectState::J_DEFAULT;
 		}
 	}
 	return true;

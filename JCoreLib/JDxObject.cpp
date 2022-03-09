@@ -308,7 +308,10 @@ JDxObject::JDxObject()
 {
 	m_fSpeed = 0.0001f;
 }
-JDxObject::~JDxObject() {}
+JDxObject::~JDxObject() 
+{
+	Release();
+}
 
 void JBaseObject::HitOverlap(JBaseObject* pObj, DWORD dwState)
 {

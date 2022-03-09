@@ -66,7 +66,7 @@ bool JCore::CoreFrame()
 bool JCore::CoreRender()
 {
     //float color[4] = { 0.7543f, 0.33421f, 0.8323f,1.0f };
-    float color[4] = { 1,0,1,1.0f };
+    float color[4] = { 0,1,1,1.0f };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);
     m_pImmediateContext->PSSetSamplers(0, 1, &m_pSamplerState);
 

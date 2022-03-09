@@ -160,8 +160,43 @@ bool    JObject2D::SetIndexData()
 	return true;
 }
 
+void    JObject2D::FadeIn()
+{
+	m_fAlpha += g_fSecPerFrame * 0.5f;
+	m_fAlpha = min(m_fAlpha, 1.0f);
+	if (m_fAlpha >= 1.0f)
+	{
+		m_bFadeIn = false;
+	}
+}
+void    JObject2D::FadeOut()
+{
+	m_fAlpha = m_fAlpha - g_fSecPerFrame * 0.5f;
+	m_fAlpha = max(m_fAlpha, 0.0f);
+	if (m_fAlpha <= 0.0f)
+	{
+		m_bFadeOut = false;
+	}
+}
+bool	JObject2D::Frame()
+{
+	if (m_bFadeIn)	FadeIn();
+	if (m_bFadeOut)	FadeOut();
+	m_ConstantList.Color = m_vColor;
+	m_ConstantList.Timer = JVector4(
+		g_fGameTimer,
+		0,
+		0,
+		1.0f);
+	m_pContext->UpdateSubresource(
+		m_pConstantBuffer, 0, NULL, &m_ConstantList, 0, 0);
+	return true;
+}
+
 JObject2D::JObject2D()
 {
+	m_fAlpha = 1.0f;
+	m_vColor = JVector4(1, 1, 1, 1);
 	m_rtSource.left = 0; m_rtSource.right = 0;
 	m_rtSource.top = 0; m_rtSource.bottom = 0;
 	m_rtDraw.left = 0; m_rtDraw.right = g_rtClient.right;

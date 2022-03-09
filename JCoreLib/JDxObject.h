@@ -26,18 +26,19 @@ enum JSelectType
 // 1000  - 수류탄
 // 0111 = 7(속성)
 // 1111 = 15
-enum TSelectState
+enum JSelectState
 {
-	T_DEFAULT = 0,  // 커서가 위에 없을 때(T_FOCUS상태에서 다른 곳을 T_ACTIVE하면 전환된다.)
-	T_HOVER = 1,	// 커서가 위에 있을 때
-	T_FOCUS = 2,	// T_ACTIVE상태에서 왼쪽 버튼을 다른 곳에서 놓았을 때(취소)
-	T_ACTIVE = 4,	// 마우스 왼쪽 버튼 누르고 있을 때
-	T_SELECTED = 8, // T_ACTIVE 상태에서 왼쪼버튼 놓았을 때
+	J_DEFAULT = 0,  // 커서가 위에 없을 때(J_FOCUS상태에서 다른 곳을 J_ACTIVE하면 전환된다.)
+	J_HOVER = 1,	// 커서가 위에 있을 때
+	J_FOCUS = 2,	// J_ACTIVE상태에서 왼쪽 버튼을 다른 곳에서 놓았을 때(취소)
+	J_ACTIVE = 4,	// 마우스 왼쪽 버튼 누르고 있을 때
+	J_SELECTED = 8, // J_ACTIVE 상태에서 왼쪼버튼 놓았을 때
 };
 
 class JBaseObject
 {
 public:
+	std::wstring m_csName;
 	bool m_bDead;
 	int m_iCollisionID;
 	int m_iSelectID;
@@ -51,24 +52,29 @@ public:
 	DWORD m_dwSelectType;
 	DWORD		m_dwSelectState;
 	bool		m_bSelect;
-	bool m_bAlphaBlend = TRUE;
+	bool m_bAlphaBlend;
 
 public:
 	virtual void HitOverlap(JBaseObject* pObj, DWORD dwState);
 	virtual void HitSelect(JBaseObject* pObj, DWORD dwState);
-
+	virtual void SetCollisionType(DWORD dwCollisionType, DWORD dwSelectType)
+	{
+		m_dwCollisionType = dwCollisionType;
+		m_dwSelectType = dwSelectType;
+	}
 public:
 	JBaseObject()
 	{
 		m_bDead = false;
 		m_bSelect = false;
-		m_dwSelectState = T_DEFAULT;
+		m_bAlphaBlend = true;
+		m_dwSelectState = J_DEFAULT;
 		m_iCollisionID = -1;
 		m_iSelectID = -1;
 		m_vDirection.x = 0.0f;
 		m_vDirection.y = 0.0f;
-		m_dwCollisionType = JCollisionType::Overlap;
-		m_dwSelectType = JCollisionType::Overlap;
+		m_dwCollisionType = JCollisionType::Ignore;
+		m_dwSelectType = JSelectType::Select_Ignore;
 	}
 
 };
