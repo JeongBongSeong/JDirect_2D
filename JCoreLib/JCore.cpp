@@ -1,5 +1,7 @@
 #include "JCore.h"
 #include "JObjectMgr.h"
+#include "JSoundMgr.h"
+
 bool JCore::CoreInit()
 {
     m_GameTimer.Init();
@@ -58,6 +60,7 @@ bool JCore::CoreFrame()
     m_GameTimer.Frame();
     JInput::Get().Frame();
     I_ObjectMgr.Frame();
+    I_Sound.Frame();
     Frame();
     m_dxWrite.Frame();
     return true;

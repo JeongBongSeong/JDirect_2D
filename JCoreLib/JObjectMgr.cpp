@@ -58,7 +58,10 @@ bool JObjectMgr::Frame()
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
 		if (pObjSrc->m_dwCollisionType == JSelectType::Select_Ignore) continue;
-		DWORD dwState = JCollisionType::Overlap;
+		DWORD dwState = JSelectState::J_DEFAULT;
+		pObjSrc->m_dwSelectState = JSelectState::J_DEFAULT;
+
+
 		for (auto dest : m_ObjectList)
 		{
 			JBaseObject* pObjDest = (JBaseObject*)dest.second;

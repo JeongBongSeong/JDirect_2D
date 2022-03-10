@@ -42,16 +42,17 @@ public:
 	bool m_bDead;
 	int m_iCollisionID;
 	int m_iSelectID;
-	float   m_fSpeed;
+	float m_fSpeed;
 	JVector2 m_vPos;
 	JVector2 m_vDirection;
-	float		m_fWidth;
-	float		m_fHeight;
-	JRect		m_rtCollision;
+	float m_fWidth;
+	float m_fHeight;
+	JRect m_rtCollision;
 	DWORD m_dwCollisionType;
 	DWORD m_dwSelectType;
-	DWORD		m_dwSelectState;
-	bool		m_bSelect;
+	DWORD m_dwSelectState;
+	DWORD m_dwPreSelectState;
+	bool m_bSelect;
 	bool m_bAlphaBlend;
 
 public:

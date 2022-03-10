@@ -48,6 +48,17 @@ public:
 	}
 };
 
+static void DisplayText(const char* fmt, ...)
+{
+	va_list arg;
+	va_start(arg, fmt);
+	char buf[1024 + 256] = { 0, };
+	vsprintf_s(buf, fmt, arg);
+	OutputDebugStringA((char*)buf);
+	va_end(arg);
+}
+
+
 #define GAME_START int WINAPI wWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance, LPWSTR    lpCmdLine, int       nCmdShow){   Sample core;   
 #define GAME_WIN(s,x,y) if (core.MyRegisterClass(hInstance) == FALSE) return 1;   if (core.SetWindow(L#s, x, y) == FALSE) return 1;   core.GameRun();    return 1;}
 #define SIMPLE_WIN() if (core.MyRegisterClass(hInstance) == FALSE) return 1;   if (core.SetWindow() == FALSE) return 1;   core.GameRun();    return 1;}
