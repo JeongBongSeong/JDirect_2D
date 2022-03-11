@@ -1,6 +1,8 @@
 //위치46 62  크기67 78
 #include "Sample.h"
 #include "JObjectMgr.h"
+#include "JFsm.h"
+
 void	Sample::CreateResizeDevice(UINT iWidth, UINT iHeight)
 {
 	int k = 0;

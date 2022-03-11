@@ -57,7 +57,7 @@ bool	Sample::Init()
 	m_PlayerObj.SetRectDraw({ 0,0, 42,56 });
 	
 	
-	if (!m_PlayerObj.Create(m_pd3dDevice, m_pImmediateContext,
+	if (!m_PlayerObj.Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
 		L"../../data/bitmap1.bmp",
 		L"../../data/bitmap2.bmp"))
 	{
@@ -80,7 +80,7 @@ bool	Sample::Init()
 		}
 
 		npc->SetPosition(JVector2(50 + iNpc * 150, 50));
-		if (!npc->Create(m_pd3dDevice, m_pImmediateContext,
+		if (!npc->Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
 			L"../../data/bitmap1.bmp",
 			L"../../data/bitmap2.bmp"))
 		{

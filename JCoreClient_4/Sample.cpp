@@ -64,31 +64,31 @@ bool	Sample::Init()
 		return false;
 	}
 
-	for (int iNpc = 0; iNpc < 10; iNpc++)
-	{
-		JObjectNpc2D* npc = new JObjectNpc2D;
-		npc->Init();
-		if (iNpc % 2 == 0)
-		{
-			npc->SetRectSource({ 46,63,69,79 });
-			npc->SetRectDraw({ 0,0, 69,79 });
-		}
-		else
-		{
-			npc->SetRectSource({ 1,63,42,76 });
-			npc->SetRectDraw({ 0,0, 42,76 });
-		}
+	//for (int iNpc = 0; iNpc < 10; iNpc++)
+	//{
+	//	JObjectNpc2D* npc = new JObjectNpc2D;
+	//	npc->Init();
+	//	if (iNpc % 2 == 0)
+	//	{
+	//		npc->SetRectSource({ 46,63,69,79 });
+	//		npc->SetRectDraw({ 0,0, 69,79 });
+	//	}
+	//	else
+	//	{
+	//		npc->SetRectSource({ 1,63,42,76 });
+	//		npc->SetRectDraw({ 0,0, 42,76 });
+	//	}
 
-		npc->SetPosition(JVector2(50 + iNpc * 150, 50));
-		if (!npc->Create(m_pd3dDevice, m_pImmediateContext,
-			L"../../data/bitmap1.bmp",
-			L"../../data/bitmap2.bmp"))
-		{
-			return false;
-		}
-		m_NpcLlist.push_back(npc);
-	}
-	
+	//	npc->SetPosition(JVector2(50 + iNpc * 150, 50));
+	//	if (!npc->Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
+	//		L"../../data/bitmap1.bmp",
+	//		L"../../data/bitmap2.bmp"))
+	//	{
+	//		return false;
+	//	}
+	//	m_NpcLlist.push_back(npc);
+	//}
+	//
 
 
 
