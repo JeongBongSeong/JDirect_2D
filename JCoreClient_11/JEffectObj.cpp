@@ -42,6 +42,7 @@ bool JEffectObj::Render()
 	if (m_bDead) return true;
 	JObject2D::Render();
 	return true;
+
 }
 bool JEffectObj::Release()
 {
