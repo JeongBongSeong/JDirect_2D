@@ -10,6 +10,7 @@ bool JCore::CoreInit()
     {
         I_Shader.Set(m_pd3dDevice);
         I_Texture.Set(m_pd3dDevice);
+        JDxState::SetState(m_pd3dDevice);
 
         if (m_dxWrite.Init())
         {
@@ -25,17 +26,6 @@ bool JCore::CoreInit()
         }
     }
     Init();
-
-    //
-    D3D11_SAMPLER_DESC sd;
-    ZeroMemory(&sd, sizeof(D3D11_SAMPLER_DESC));
-    sd.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
-    sd.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
-    sd.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
-    sd.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
-    sd.MinLOD = FLT_MAX;
-    sd.MaxLOD = FLT_MIN;
-    HRESULT hr = m_pd3dDevice->CreateSamplerState(&sd, &m_pSamplerState);
 
     return true;
 }
@@ -73,7 +63,7 @@ bool JCore::CoreRender()
     //float color[4] = { 0.7543f, 0.33421f, 0.8323f,1.0f };
     float color[4] = { 0,1,1,1.0f };
     m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, color);
-    m_pImmediateContext->PSSetSamplers(0, 1, &m_pSamplerState);
+    m_pImmediateContext->PSSetSamplers(0, 1, &JDxState::m_pSamplerState);
 
     Render();
     m_GameTimer.Render();
@@ -87,7 +77,7 @@ bool JCore::CoreRender()
 bool JCore::CoreRelease()
 {
     Release();
-    if (m_pSamplerState)m_pSamplerState->Release();
+    JDxState::Release();
     m_dxWrite.Release();
     m_GameTimer.Release();
     JInput::Get().Release();

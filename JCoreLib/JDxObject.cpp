@@ -192,25 +192,7 @@ bool JDxObject::Create(ID3D11Device* pd3dDevice,	ID3D11DeviceContext* pContext, 
 	{
 		return false;
 	}
-	
 
-	
-	D3D11_BLEND_DESC blenddesc;
-	ZeroMemory(&blenddesc, sizeof(D3D11_BLEND_DESC));
-
-	blenddesc.RenderTarget[0].BlendEnable = TRUE;
-	blenddesc.RenderTarget[0].SrcBlend = D3D11_BLEND_SRC_ALPHA;
-	blenddesc.RenderTarget[0].DestBlend = D3D11_BLEND_INV_SRC_ALPHA;
-	blenddesc.RenderTarget[0].BlendOp = D3D11_BLEND_OP_ADD;
-	//
-	blenddesc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-	blenddesc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
-	blenddesc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
-	blenddesc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-	hr = m_pd3dDevice->CreateBlendState(&blenddesc, &m_pAlphaBlend);
-
-	blenddesc.RenderTarget[0].BlendEnable = FALSE;
-	hr = m_pd3dDevice->CreateBlendState(&blenddesc, &m_pAlphaBlendDisable);
 	return true;
 }
 bool	JDxObject::Init()
@@ -253,11 +235,11 @@ bool	JDxObject::Render()
 
 	if (m_bAlphaBlend)
 	{
-		m_pContext->OMSetBlendState(m_pAlphaBlend, 0, -1);
+		m_pContext->OMSetBlendState(JDxState::m_pAlphaBlend, 0, -1);
 	}
 	else 
 	{
-		m_pContext->OMSetBlendState(m_pAlphaBlendDisable, 0, -1);
+		m_pContext->OMSetBlendState(JDxState::m_pAlphaBlendDisable, 0, -1);
 	}
 	
 
@@ -297,11 +279,6 @@ bool JDxObject::Release()
 	m_pConstantBuffer = nullptr;
 	m_pVertexLayout = nullptr;
 
-	if (m_pAlphaBlendDisable) m_pAlphaBlendDisable->Release();
-	if (m_pAlphaBlend) m_pAlphaBlend->Release();
-	m_pAlphaBlendDisable = nullptr;
-	m_pAlphaBlend = nullptr;
-
 	return true;
 }
 JDxObject::JDxObject()
@@ -314,7 +291,7 @@ JDxObject::~JDxObject()
 
 void JBaseObject::HitOverlap(JBaseObject* pObj, DWORD dwState)
 {
-
+	int k = 0;
 }
 void JBaseObject::HitSelect(JBaseObject* pObj, DWORD dwState)
 {

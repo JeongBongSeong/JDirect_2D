@@ -1,6 +1,7 @@
 #pragma once
 #include"JTextureMgr.h"
 #include"JShaderMgr.h"
+#include "JDxState.h"
 
 struct SimpleVertex
 {
@@ -39,6 +40,8 @@ class JBaseObject
 {
 public:
 	std::wstring m_csName;
+public:
+	JBaseObject* m_pParent = nullptr;
 	bool m_bDead;
 	int m_iCollisionID;
 	int m_iSelectID;
@@ -101,8 +104,6 @@ public:
 	JShader* m_pVShader = nullptr;
 	JShader* m_pPShader = nullptr;
 public:
-	ID3D11BlendState* m_pAlphaBlend;
-	ID3D11BlendState* m_pAlphaBlendDisable;
 	D3D11_TEXTURE2D_DESC m_TextureDesc;
 	
 

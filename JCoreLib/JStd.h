@@ -13,6 +13,7 @@
 #include<functional>
 #include<d3dcompiler.h>
 #include <dxgidebug.h>
+#include <queue>
 #include"JCollision.h"
 
 

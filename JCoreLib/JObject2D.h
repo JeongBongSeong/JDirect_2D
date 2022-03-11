@@ -32,6 +32,10 @@ public:
 public:
 	virtual bool Frame() override;
 public:
+	bool Load(ID3D11Device* pd3dDevice, std::wstring filename) {
+		return true;
+	};
+public:
 	JObject2D();
 	virtual ~JObject2D();
 };

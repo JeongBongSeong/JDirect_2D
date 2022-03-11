@@ -75,6 +75,9 @@
     <ClCompile Include="JVector3.cpp">
       <Filter>math</Filter>
     </ClCompile>
+    <ClCompile Include="JDxState.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="JCore.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="JVector3.h">
       <Filter>math</Filter>
+    </ClInclude>
+    <ClInclude Include="JDxState.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

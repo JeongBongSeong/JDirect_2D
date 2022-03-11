@@ -82,10 +82,10 @@ bool JObjectMgr::Frame()
 	for (auto src : m_SelectList)
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
-		if (pObjSrc->m_dwSelectType == JSelectType::Select_Ignore) continue;
+		//if (pObjSrc->m_dwSelectType == JSelectType::Select_Ignore) continue;
 		DWORD dwState = JSelectState::J_DEFAULT;
 
-		if (JCollision::RectToPoint(pObjSrc->m_rtCollision, (float)g_ptMouse.x, (float)g_ptMouse.y))
+		if (pObjSrc->m_dwSelectType != JSelectType::Select_Ignore && JCollision::RectToPoint(pObjSrc->m_rtCollision, (float)g_ptMouse.x, (float)g_ptMouse.y))
 		{
 			DWORD dwKeyState = JInput::Get().m_dwMouseState[0];
 				pObjSrc->m_dwSelectState = JSelectState::J_HOVER;

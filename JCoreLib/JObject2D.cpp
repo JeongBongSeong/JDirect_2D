@@ -6,8 +6,12 @@ void JObject2D::SetRectSource(RECT rt)
 void JObject2D::SetRectDraw(RECT rt)
 {
 	m_rtDraw = rt;
+	m_vPos.x = rt.left + (rt.right / 2.0f);
+	m_vPos.y = rt.top + (rt.bottom / 2.0f);
 	m_fWidth = rt.right;
 	m_fHeight = rt.bottom;
+
+	m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
 }
 void JObject2D::UpdateRectDraw(RECT rt)
 {
@@ -19,11 +23,7 @@ void JObject2D::AddPosition(JVector2 vPos)
 	m_vPos = m_vPos + vPos;
 	// 오브젝트의 위치값설정 
 	m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
-	//m_rtCollision.top = m_vPos.x - (m_fWidth / 2.0f);
-	//m_rtCollision.left = m_vPos.y - (m_fHeight / 2.0f);
-	//m_rtCollision.bottom = m_fHeight;
-	//m_rtCollision.right = m_fWidth;
-	//ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList);
+
 	SetVertexData();
 	SetIndexData();
 	if (m_pContext != nullptr)
@@ -35,6 +35,18 @@ void JObject2D::AddPosition(JVector2 vPos)
 void JObject2D::SetPosition(JVector2 vPos)
 {
 	m_vPos = vPos;
+	SetRectDraw({
+		(LONG)(m_vPos.x - m_rtDraw.right / 2.0f),
+		(LONG)(m_vPos.y - m_rtDraw.bottom / 2.0f),
+		m_rtDraw.right,
+		m_rtDraw.bottom });
+	m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
+	SetVertexData();
+	SetIndexData();
+	if (m_pContext != nullptr)
+	{
+		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0);
+	}
 }
 void JObject2D::Convert(JVector2 center, float fWidth, float fHeight, vector<SimpleVertex>& retList)
 {
