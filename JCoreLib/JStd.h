@@ -15,12 +15,13 @@
 #include <dxgidebug.h>
 #include <queue>
 #include"JCollision.h"
-
+#include <wrl.h> 
 
 #pragma comment (lib,"d3d11.lib")
 #pragma comment (lib,"D3DCompiler.lib")
 #pragma comment (lib,"DirectXTK.lib")
 using namespace std;
+using namespace Microsoft::WRL;
 
 extern RECT g_rtClient;
 extern HWND g_hWnd;

@@ -1,13 +1,19 @@
 #pragma once
 #include "JWindow.h"
+
 class JDevice : public JWindow
 {
 public:
-	ID3D11Device* m_pd3dDevice;// 디바이스 객체
-	IDXGISwapChain* m_pSwapChain;// 스왑체인 객체
-	ID3D11RenderTargetView* m_pRenderTargetView;// 메인 랜더타켓 뷰 //여러개의 백버퍼가 있을 때 어느 버퍼를 뿌릴 걸지 결정하는 것
-	IDXGIFactory* m_pGIFactory;
-	ID3D11DeviceContext* m_pImmediateContext;// 다비이스 컨텍스트 객체
+	ComPtr<ID3D11Device> m_pd3dDevice;
+	//ID3D11Device* m_pd3dDevice;// 디바이스 객체
+	ComPtr<IDXGISwapChain> m_pSwapChain;
+	//IDXGISwapChain* m_pSwapChain;// 스왑체인 객체
+	ComPtr<ID3D11RenderTargetView> m_pRenderTargetView;
+	//ID3D11RenderTargetView* m_pRenderTargetView;// 메인 랜더타켓 뷰 //여러개의 백버퍼가 있을 때 어느 버퍼를 뿌릴 걸지 결정하는 것
+	ComPtr<IDXGIFactory> m_pGIFactory;
+	//IDXGIFactory* m_pGIFactory;
+	ComPtr<ID3D11DeviceContext> m_pImmediateContext;
+	//ID3D11DeviceContext* m_pImmediateContext;// 다비이스 컨텍스트 객체
 
 	DXGI_SWAP_CHAIN_DESC	m_SwapChainDesc;	// 스왑체인 속성값
 	D3D11_VIEWPORT m_ViewPort;// 뷰 포트 속성값

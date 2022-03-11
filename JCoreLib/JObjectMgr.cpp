@@ -50,7 +50,15 @@ bool JObjectMgr::Init()
 {
 	return true;
 }
-
+void JObjectMgr::CallRecursive(JBaseObject* pSrcObj, DWORD dwState)
+{
+	if (pSrcObj->m_pParent == nullptr)
+	{
+		return;
+	}
+	CallRecursive(pSrcObj->m_pParent, dwState);
+	pSrcObj->HitSelect(pSrcObj, dwState);
+}
 bool JObjectMgr::Frame()
 {
 	// collision check
@@ -102,6 +110,7 @@ bool JObjectMgr::Frame()
 				pObjSrc->m_dwSelectState = JSelectState::J_SELECTED;
 			}
 
+			CallRecursive(pObjSrc, dwState);
 			FunctionIterator colliter = m_fnSelectExecute.find(pObjSrc->m_iSelectID);
 			if (colliter != m_fnSelectExecute.end())
 			{

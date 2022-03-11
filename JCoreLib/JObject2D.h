@@ -36,6 +36,8 @@ public:
 		return true;
 	};
 public:
+	virtual void UpdateData() {};
+public:
 	JObject2D();
 	virtual ~JObject2D();
 };

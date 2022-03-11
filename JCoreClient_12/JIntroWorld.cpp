@@ -11,7 +11,7 @@ bool JIntroWorld::CreateModelType()
 	JShader* pPShader = I_Shader.CreatePixelShader(m_pd3dDevice, L"Shader.txt", "PSAlphaBlend");
 
 	JImageObject* obj = new JImageObject;
-	obj->m_csName = L"TImageObject:bk";
+	obj->m_csName = L"JImageObject:bk";
 	obj->Init();
 	obj->SetRectDraw({ 0,0, g_rtClient.right,g_rtClient.bottom });
 	obj->SetPosition(JVector2(0,0));
@@ -80,8 +80,8 @@ bool JIntroWorld::CreateModelType()
 	JButtonObject* pDlgWindow = (JButtonObject*)I_UI.GetPtr(L"btnDlg")->Clone();
 	pDlgWindow->m_pParent = nullptr;
 	pDlgWindow->m_rtOffset = { 50, 50, 50, 50 };
-	pDlgWindow->SetRectDraw({ 0,0, g_rtClient.right / 3,g_rtClient.bottom / 3 });
-	pDlgWindow->AddPosition(JVector2(400, 300));
+	pDlgWindow->SetRectDraw({ 0,0, g_rtClient.right / 2,g_rtClient.bottom / 2 });
+	pDlgWindow->AddPosition(JVector2(g_rtClient.right / 4, g_rtClient.bottom / 4));
 	pDlgWindow->UpdateData();
 	pComposedObj->Add(pDlgWindow);
 
@@ -89,7 +89,7 @@ bool JIntroWorld::CreateModelType()
 	pNewDlgBtn->m_csName = L"btnStartClone_ComposedList";
 	pNewDlgBtn->m_pParent = pDlgWindow;
 	pNewDlgBtn->SetRectDraw({ 0,0, 100,50 });
-	pNewDlgBtn->AddPosition(pDlgWindow->m_vPos + JVector2(0, 0));
+	pNewDlgBtn->AddPosition(pDlgWindow->m_vPos - JVector2(pNewDlgBtn->m_fWidth/2, pNewDlgBtn->m_fHeight/2));
 	pNewDlgBtn->UpdateData();
 	pComposedObj->Add(pNewDlgBtn);
 	I_UI.m_list.insert(std::make_pair(L"dlgWindow", pComposedObj));
@@ -127,40 +127,39 @@ bool JIntroWorld::Load(std::wstring filename)
 	pNewBK->m_csName = L"JImageObjectClock:bk";
 	pNewBK->SetPosition(JVector2(400, 300));
 	pNewBK->UpdateData();
-	m_UIObj.push_back(pNewBK);
+	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewBK));
 
 	//ÄÄÆ÷Áþ
 
-	JUIModel* pNewBtn = I_UI.GetPtr(L"btnStart")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
-	pNewBtn->m_csName = L"btnStartClone1";
-	pNewBtn->SetRectDraw({ 0,0, 100,50 });
-	pNewBtn->SetPosition(JVector2(300, 25));
-	pNewBtn->UpdateData();
-	m_UIObj.push_back(pNewBtn);
+	JUIModel* pNewBtn1 = I_UI.GetPtr(L"btnStart")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
+	pNewBtn1->m_csName = L"btnStartClone1";
+	pNewBtn1->SetRectDraw({ 0,0, 100,50 });
+	pNewBtn1->SetPosition(JVector2(300, 25));
+	pNewBtn1->UpdateData();
+	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewBtn1));
 
 	JUIModel* pNewBtn2 = I_UI.GetPtr(L"btnStart")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
 	pNewBtn2->m_csName = L"btnStartClone2";
 	pNewBtn2->SetRectDraw({ 0,0, 100,100 });
 	pNewBtn2->SetPosition(JVector2(400, 150));
 	pNewBtn2->UpdateData();
-	m_UIObj.push_back(pNewBtn2);
+	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewBtn2));
 
-
-	pNewBtn = I_UI.GetPtr(L"btnStart")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
-	pNewBtn->m_csName = L"btnStartClone3";
-	pNewBtn->SetRectDraw({ 0,0, 100,50 });
-	pNewBtn->SetPosition(JVector2(500, 200));
-	pNewBtn->UpdateData();
-	m_UIObj.push_back(pNewBtn);
+	JUIModel* pNewBtn3 =I_UI.GetPtr(L"btnStart")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
+	pNewBtn3->m_csName = L"btnStartClone3";
+	pNewBtn3->SetRectDraw({ 0,0, 100,50 });
+	pNewBtn3->SetPosition(JVector2(500, 200));
+	pNewBtn3->UpdateData();
+	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewBtn3));
 
 	JUIModel* pNewDlgBtnClone = I_UI.GetPtr(L"dlgWindow")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
 	pNewDlgBtnClone->m_csName = L"JUIModelComposedClone";
 	pNewDlgBtnClone->m_pParent = nullptr;
 	pNewDlgBtnClone->SetPosition(JVector2(0, 0));
 	pNewDlgBtnClone->UpdateData();
-	m_UIObj.push_back(pNewDlgBtnClone);
+	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewDlgBtnClone));
 
-	JListCtrlObject* pListCtrl = new JListCtrlObject;
+	std::shared_ptr<JListCtrlObject> pListCtrl = std::make_shared<JListCtrlObject>();
 	pListCtrl->m_csName = L"JListCtrlObject";
 	pListCtrl->m_pParent = pNewBK;
 	pListCtrl->SetRectDraw({ 100,100, 100,300 });

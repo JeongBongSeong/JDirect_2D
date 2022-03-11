@@ -14,7 +14,7 @@ bool JWorld::Frame()
 {
 	for (auto obj : m_UIObj)
 	{
-		JObject2D* pObj = obj;
+		JObject2D* pObj = obj.get();
 		if (pObj != nullptr)
 		{
 			pObj->Frame();
@@ -22,7 +22,7 @@ bool JWorld::Frame()
 	}
 	for (auto obj : m_NpcObj)
 	{
-		JObject2D* pObj = obj;
+		JObject2D* pObj = obj.get();
 		if (pObj != nullptr)
 		{
 			pObj->Frame();
@@ -34,7 +34,7 @@ bool JWorld::Render()
 {
 	for (auto obj : m_UIObj)
 	{
-		JObject2D* pObj = obj;
+		JObject2D* pObj = obj.get();
 		if (pObj != nullptr)
 		{
 			pObj->Render();
@@ -42,7 +42,7 @@ bool JWorld::Render()
 	}
 	for (auto obj : m_NpcObj)
 	{
-		JObject2D* pObj = obj;
+		JObject2D* pObj = obj.get();
 		if (pObj->m_bDead == false)
 		{
 			pObj->Render();
@@ -57,7 +57,6 @@ bool JWorld::Release()
 		if (obj != nullptr)
 		{
 			obj->Release();
-			delete obj;
 			obj = nullptr;
 		}
 	}
@@ -66,7 +65,6 @@ bool JWorld::Release()
 		if (obj != nullptr)
 		{
 			obj->Release();
-			delete obj;
 			obj = nullptr;
 		}
 	}
@@ -75,7 +73,6 @@ bool JWorld::Release()
 		if (obj != nullptr)
 		{
 			obj->Release();
-			delete obj;
 			obj = nullptr;
 		}
 	}
@@ -84,7 +81,6 @@ bool JWorld::Release()
 		if (obj != nullptr)
 		{
 			obj->Release();
-			delete obj;
 			obj = nullptr;
 		}
 	}

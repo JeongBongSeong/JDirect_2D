@@ -39,7 +39,7 @@ private:
 	int m_iIndex;
 public:
 	friend class JSingleton<JSoundMgr>;
-	std::map<std::wstring, JSound*> m_list;
+	std::map<std::wstring, std::shared_ptr<JSound>> m_list;
 	FMOD::System* m_pSystem = nullptr;
 public:
 	JSound* Load(std::string filename);

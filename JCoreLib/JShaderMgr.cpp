@@ -92,16 +92,15 @@ JShader* JShaderMgr::CreateVertexShader(ID3D11Device* pd3dDevice,
 	{
 		return pData;
 	}
-	pData = new JShader;
-	if (!pData->CreateVertexShader(pd3dDevice, filename, entry))
+	std::shared_ptr<JShader> pNewData = std::make_shared<JShader>();
+	if (!pNewData->CreateVertexShader(pd3dDevice, filename, entry))
 	{
-		delete pData;
 		return nullptr;
 	}
-	pData->m_csName = name;
-	m_list.insert(make_pair(pData->m_csName, pData));
+	pNewData->m_csName = name;
+	m_list.insert(make_pair(pNewData->m_csName, pNewData));
 	m_iIndex++;
-	return pData;
+	return pNewData.get();
 }
 JShader* JShaderMgr::CreatePixelShader(ID3D11Device* pd3dDevice,
 	std::wstring filename, std::string entry)
@@ -112,16 +111,16 @@ JShader* JShaderMgr::CreatePixelShader(ID3D11Device* pd3dDevice,
 	{
 		return pData;
 	}
-	pData = new JShader;
-	if (!pData->CreatePixelShader(pd3dDevice, filename, entry))
+
+	std::shared_ptr<JShader> pNewData = std::make_shared<JShader>();
+	if (!pNewData->CreatePixelShader(pd3dDevice, filename, entry))
 	{
-		delete pData;
 		return nullptr;
 	}
-	pData->m_csName = name;
-	m_list.insert(make_pair(pData->m_csName, pData));
+	pNewData->m_csName = name;
+	m_list.insert(make_pair(pNewData->m_csName, pNewData));
 	m_iIndex++;
-	return pData;
+	return pNewData.get();
 }
 
 JShaderMgr::JShaderMgr()

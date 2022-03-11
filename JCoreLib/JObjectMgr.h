@@ -28,6 +28,7 @@ public:
 	bool Init();
 	bool Frame();
 	bool Release();
+	void CallRecursive(JBaseObject* pSrcObj, DWORD dwState);
 private:
 	JObjectMgr();
 public:

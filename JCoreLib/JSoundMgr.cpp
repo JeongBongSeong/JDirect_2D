@@ -170,11 +170,11 @@ JSound* JSoundMgr::Load(std::string filename)
 	{
 		if (data.second->m_csName == name)
 		{
-			return data.second;
+			return data.second.get();
 		}
 	}
 
-	JSound* pSound = new JSound;
+	std::shared_ptr<JSound>pSound = std::make_shared<JSound>();
 	
 	FMOD_RESULT ret = m_pSystem->createSound(filename.c_str(), FMOD_DEFAULT, 0, &pSound->m_pSound);
 	
@@ -191,7 +191,7 @@ JSound* JSoundMgr::Load(std::string filename)
 
 	m_iIndex++;
 
-	return pSound;
+	return pSound.get();
 }
 
 JSound* JSoundMgr::GetPtr(std::wstring csName)
@@ -199,7 +199,7 @@ JSound* JSoundMgr::GetPtr(std::wstring csName)
 	auto iter = m_list.find(csName);
 	if (iter != m_list.end())
 	{
-		return (*iter).second;
+		return (*iter).second.get();
 	}
 	return nullptr;
 
@@ -235,7 +235,6 @@ bool JSoundMgr::Release()
 	for (auto data : m_list)
 	{
 		data.second->Release();
-		delete data.second;
 	}
 	m_list.clear();
 	m_pSystem->close();
