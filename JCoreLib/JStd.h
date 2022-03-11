@@ -12,7 +12,9 @@
 #include<string>
 #include<functional>
 #include<d3dcompiler.h>
+#include <dxgidebug.h>
 #include"JCollision.h"
+
 
 #pragma comment (lib,"d3d11.lib")
 #pragma comment (lib,"D3DCompiler.lib")
@@ -58,6 +60,19 @@ static void DisplayText(const char* fmt, ...)
 	va_end(arg);
 }
 
+static void MemoryReporting()
+{
+#if defined(DEBUG) | defined(_DEBUG)
+	HMODULE dxgidebugdll = GetModuleHandleW(L"dxgidebug.dll");
+	decltype(&DXGIGetDebugInterface) GetDebugInterface = reinterpret_cast<decltype(&DXGIGetDebugInterface)>(GetProcAddress(dxgidebugdll, "DXGIGetDebugInterface"));
+	IDXGIDebug* debug;
+	GetDebugInterface(IID_PPV_ARGS(&debug));
+	OutputDebugStringW(L"Starting Live Direct3D Object Dump:\r\n");
+	debug->ReportLiveObjects(DXGI_DEBUG_D3D11, DXGI_DEBUG_RLO_ALL);
+	OutputDebugStringW(L"Completed Live Direct3D Object Dump.\r\n");
+	debug->Release();
+#endif
+}
 
 #define GAME_START int WINAPI wWinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance, LPWSTR    lpCmdLine, int       nCmdShow){   Sample core;   
 #define GAME_WIN(s,x,y) if (core.MyRegisterClass(hInstance) == FALSE) return 1;   if (core.SetWindow(L#s, x, y) == FALSE) return 1;   core.GameRun();    return 1;}

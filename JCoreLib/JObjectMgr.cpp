@@ -59,7 +59,7 @@ bool JObjectMgr::Frame()
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
 		if (pObjSrc->m_dwCollisionType == JSelectType::Select_Ignore) continue;
 		DWORD dwState = JSelectState::J_DEFAULT;
-		pObjSrc->m_dwSelectState = JSelectState::J_DEFAULT;
+
 
 
 		for (auto dest : m_ObjectList)
@@ -72,7 +72,6 @@ bool JObjectMgr::Frame()
 				if (colliter != m_fnCollisionExecute.end())
 				{
 					CollisionFunction call = colliter->second;
-					//hit ~ 함수 실행
 					call(pObjDest, dwState);
 				}
 			}
@@ -84,7 +83,8 @@ bool JObjectMgr::Frame()
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
 		if (pObjSrc->m_dwSelectType == JSelectType::Select_Ignore) continue;
-		DWORD dwState = JCollisionType::Overlap;
+		DWORD dwState = JSelectState::J_DEFAULT;
+
 		if (JCollision::RectToPoint(pObjSrc->m_rtCollision, (float)g_ptMouse.x, (float)g_ptMouse.y))
 		{
 			DWORD dwKeyState = JInput::Get().m_dwMouseState[0];
@@ -111,7 +111,16 @@ bool JObjectMgr::Frame()
 		}
 		else
 		{
-			pObjSrc->m_dwSelectState = JSelectState::J_DEFAULT;
+			if (pObjSrc->m_dwSelectState != JSelectState::J_DEFAULT)
+			{
+				pObjSrc->m_dwSelectState = JSelectState::J_DEFAULT;
+				FunctionIterator colliter = m_fnSelectExecute.find(pObjSrc->m_iSelectID);
+				if (colliter != m_fnSelectExecute.end())
+				{
+					CollisionFunction call = colliter->second;
+					call(pObjSrc, dwState);
+				}
+			}
 		}
 	}
 	return true;
@@ -119,5 +128,16 @@ bool JObjectMgr::Frame()
 
 bool JObjectMgr::Release()
 {
+	m_ObjectList.clear();
+	m_SelectList.clear();
 	return true;
 }
+JObjectMgr::JObjectMgr()
+{
+	m_iExecuteCollisionID = 0;
+	m_iExecuteSelectID = 0;
+};
+JObjectMgr::~JObjectMgr()
+{
+	Release();
+};

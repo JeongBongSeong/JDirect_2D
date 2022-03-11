@@ -9,11 +9,11 @@ public:
 	bool m_bLoadZone = false;
 public:
 	static JWorld* m_pWorld;
-	std::map<std::wstring, JObject2D*> m_UIObj;
-	std::map<std::wstring, JObject2D*> m_ItemObj;
-	std::map<std::wstring, JObject2D*> m_NpcObj;
-	std::map<std::wstring, JObject2D*> m_MapObj;
-	using m_mapIter = std::map<std::wstring, JObject2D*>::iterator;
+	std::vector<JObject2D*> m_UIObj;
+	std::vector<JObject2D*> m_ItemObj;
+	std::vector<JObject2D*> m_NpcObj;
+	std::vector<JObject2D*> m_MapObj;
+	using m_mapIter = std::vector<JObject2D*>::iterator;
 public:
 	virtual bool Load(std::wstring saveFile);
 	virtual bool Init() = 0;

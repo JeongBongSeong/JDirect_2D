@@ -29,9 +29,9 @@ public:
 	bool Frame();
 	bool Release();
 private:
-	JObjectMgr() { m_iExecuteSelectID = 0; m_iExecuteCollisionID = 0; };
+	JObjectMgr();
 public:
-	virtual ~JObjectMgr() {};
+	virtual ~JObjectMgr();
 };
 
 #define I_ObjectMgr JObjectMgr::Get()

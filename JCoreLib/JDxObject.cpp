@@ -145,10 +145,10 @@ bool JDxObject::Create(ID3D11Device* pd3dDevice,	ID3D11DeviceContext* pContext, 
 {
 
 	HRESULT hr;
-	m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
+	/*m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
 	I_ObjectMgr.AddCollisionExecute(this, std::bind(&JBaseObject::HitOverlap,this,std::placeholders::_1, std::placeholders::_2));
 
-	I_ObjectMgr.AddSelectExecute(this, std::bind(&JBaseObject::HitSelect, this, std::placeholders::_1, std::placeholders::_2));
+	I_ObjectMgr.AddSelectExecute(this, std::bind(&JBaseObject::HitSelect, this, std::placeholders::_1, std::placeholders::_2));*/
 
 	SetDevice(pd3dDevice, pContext);
 
@@ -310,7 +310,6 @@ JDxObject::JDxObject()
 }
 JDxObject::~JDxObject() 
 {
-	Release();
 }
 
 void JBaseObject::HitOverlap(JBaseObject* pObj, DWORD dwState)

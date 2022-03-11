@@ -9,6 +9,11 @@ void JObject2D::SetRectDraw(RECT rt)
 	m_fWidth = rt.right;
 	m_fHeight = rt.bottom;
 }
+void JObject2D::UpdateRectDraw(RECT rt)
+{
+	m_fWidth = rt.right;
+	m_fHeight = rt.bottom;
+}
 void JObject2D::AddPosition(JVector2 vPos)
 {
 	m_vPos = m_vPos + vPos;
@@ -18,18 +23,18 @@ void JObject2D::AddPosition(JVector2 vPos)
 	//m_rtCollision.left = m_vPos.y - (m_fHeight / 2.0f);
 	//m_rtCollision.bottom = m_fHeight;
 	//m_rtCollision.right = m_fWidth;
-	ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList);
-	m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0); 
+	//ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList);
+	SetVertexData();
+	SetIndexData();
+	if (m_pContext != nullptr)
+	{
+		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0);
+	}
 	
 }
 void JObject2D::SetPosition(JVector2 vPos)
 {
 	m_vPos = vPos;
-}
-void JObject2D::UpdateRectDraw(RECT rt)
-{
-	m_fWidth = rt.right;
-	m_fHeight = rt.bottom;
 }
 void JObject2D::Convert(JVector2 center, float fWidth, float fHeight, vector<SimpleVertex>& retList)
 {
@@ -149,6 +154,7 @@ bool    JObject2D::SetVertexData()
 }
 bool    JObject2D::SetIndexData()
 {
+	m_IndexList.clear();
 	//// 0   1,4
 	//// 2,3  5
 	//DWORD indeces[] = {

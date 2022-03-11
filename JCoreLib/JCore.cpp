@@ -51,6 +51,8 @@ bool JCore::GameRun()
         CoreRender();
     }
     CoreRelease();
+
+    MemoryReporting();
     return true;
 }
 
