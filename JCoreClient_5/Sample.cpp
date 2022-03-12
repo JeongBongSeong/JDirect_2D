@@ -64,11 +64,11 @@ bool	Sample::Init()
 	
 	I_Sound.Init();
 	//m_ZoneWorld.Init();
-	m_ZoneWorld.m_pd3dDevice = m_pd3dDevice;
-	m_ZoneWorld.m_pContext = m_pImmediateContext;
+	m_ZoneWorld.m_pd3dDevice = m_pd3dDevice.Get();
+	m_ZoneWorld.m_pContext = m_pImmediateContext.Get();
 	m_IntroWorld.Init();
-	m_IntroWorld.m_pd3dDevice = m_pd3dDevice;
-	m_IntroWorld.m_pContext = m_pImmediateContext;
+	m_IntroWorld.m_pd3dDevice = m_pd3dDevice.Get();
+	m_IntroWorld.m_pContext = m_pImmediateContext.Get();
 	m_IntroWorld.Load(L"intro.txt");
 	m_ZoneWorld.Load(L"zone.txt");
 

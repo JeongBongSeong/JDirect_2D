@@ -1,5 +1,6 @@
 //위치46 62  크기67 78
 #include "Sample.h"
+#include "JFsm.h"
 LRESULT  Sample::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)

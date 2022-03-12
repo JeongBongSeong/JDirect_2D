@@ -33,9 +33,9 @@ bool    JDxObject::SetIndexData()
 bool    JDxObject::SetConstantData()
 {
 	ZeroMemory(&m_ConstantList, sizeof(JConstantData));
-	m_ConstantList.Color.x = 0.0f;
+	m_ConstantList.Color.x = 1.0f;
 	m_ConstantList.Color.y = 1.0f;
-	m_ConstantList.Color.z = 0.0f;
+	m_ConstantList.Color.z = 1.0f;
 	m_ConstantList.Color.w = 1.0f;
 	m_ConstantList.Timer.x = 0.0f;
 	m_ConstantList.Timer.y = 1.0f;

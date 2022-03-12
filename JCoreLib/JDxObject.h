@@ -46,6 +46,7 @@ public:
 	int m_iCollisionID;
 	int m_iSelectID;
 	float m_fSpeed;
+	float m_fCurrentSpeed;
 	JVector2 m_vPos;
 	JVector2 m_vDirection;
 	float m_fWidth;
@@ -79,6 +80,7 @@ public:
 		m_vDirection.y = 0.0f;
 		m_dwCollisionType = JCollisionType::Ignore;
 		m_dwSelectType = JSelectType::Select_Ignore;
+		m_fCurrentSpeed = 0;
 	}
 
 };

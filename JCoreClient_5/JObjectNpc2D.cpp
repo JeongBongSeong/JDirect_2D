@@ -9,19 +9,19 @@ void JObjectNpc2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
 
 void JObjectNpc2D::HitSelect(JBaseObject* pObj, DWORD dwState)
 {
-    if (m_dwSelectState & T_HOVER)
+    if (m_dwSelectState & J_HOVER)
     {
         INT K = 0;
     }
-    if (m_dwSelectState & T_FOCUS)
+    if (m_dwSelectState & J_FOCUS)
     {
         INT K = 0;
     }
-    if (m_dwSelectState & T_ACTIVE)
+    if (m_dwSelectState & J_ACTIVE)
     {
         INT K = 0;
     }
-    if (m_dwSelectState & T_SELECTED)
+    if (m_dwSelectState & J_SELECTED)
     {
         m_bSelect = true;
         m_bDead = true;

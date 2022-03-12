@@ -5,7 +5,7 @@ void JPlayerObj2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
 {
 	if (dwState == JCollisionType::Overlap)
 	{
-		//pObj->m_bAlphaBlend = FALSE;
+		pObj->m_bAlphaBlend = FALSE;
 	}
 }
 

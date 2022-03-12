@@ -23,6 +23,7 @@ public:
 	bool Release();
 public:
 	void Play(bool bLoop=false);
+	bool isPlaying();
 	void PlayEffect(bool bLoop=false);
 	void Stop();
 	void Paused();

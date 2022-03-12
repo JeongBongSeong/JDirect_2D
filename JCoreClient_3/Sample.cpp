@@ -51,22 +51,26 @@ bool	Sample::Init()
 			m_ObjectList.push_back(obj);
 		}
 	}*/
+	JShader* pVShader = I_Shader.CreateVertexShader(m_pd3dDevice.Get(), L"VertexShader.txt", "VS");
+	JShader* pPShader = I_Shader.CreatePixelShader(m_pd3dDevice.Get(), L"PixelShader.txt", "PS");
+
 	m_PlayerObj.Init();
-	m_PlayerObj.SetPosition(JVector2(400, 500));
 	m_PlayerObj.SetRectSource({ 91,1,42,56 });
+	//m_PlayerObj.SetRectSouce({ 46,63,69,79 });
 	m_PlayerObj.SetRectDraw({ 0,0, 42,56 });
-	
-	
+	m_PlayerObj.SetPosition(JVector2(400, 300));
+	m_PlayerObj.m_pVShader = pVShader;
+	m_PlayerObj.m_pPShader = pPShader;
 	if (!m_PlayerObj.Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
+		nullptr,
 		L"../../data/bitmap1.bmp",
 		L"../../data/bitmap2.bmp"))
 	{
 		return false;
 	}
-
-	for (int iNpc = 0; iNpc < 10; iNpc++)
+	for (int iNpc = 0; iNpc < 5; iNpc++)
 	{
-		JObjectNpc2D* npc = new JObjectNpc2D;
+		JObjectNpc2D* npc = new JObjectNpc2D();
 		npc->Init();
 		if (iNpc % 2 == 0)
 		{
@@ -80,7 +84,12 @@ bool	Sample::Init()
 		}
 
 		npc->SetPosition(JVector2(50 + iNpc * 150, 50));
+
+		npc->m_pVShader = pVShader;
+		npc->m_pPShader = pPShader;
+
 		if (!npc->Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
+			nullptr,
 			L"../../data/bitmap1.bmp",
 			L"../../data/bitmap2.bmp"))
 		{

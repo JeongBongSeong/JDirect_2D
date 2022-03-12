@@ -63,33 +63,34 @@ bool	Sample::Init()
 	m_PlayerObj.m_pPShader = pPShader;
 	if (!m_PlayerObj.Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
 		nullptr,
-		L"../../data/bitmap1.bmp",
-		L"../../data/bitmap2.bmp"))
+		L"../../data/BattleCity/ObjectList.png"
+	//	L"../../data/BattleCity/ObjectList_White.png"
+	))
 	{
 		return false;
 	}
 
 	for (int iNpc = 0; iNpc < 5; iNpc++)
 	{
-		JObjectNpc2D npc;
-		npc.Init();
+		JObjectNpc2D* npc = new JObjectNpc2D();
+		npc->Init();
 		if (iNpc % 2 == 0)
 		{
-			npc.SetRectSource({ 46,63,69,79 });
-			npc.SetRectDraw({ 0,0, 69,79 });
+			npc->SetRectSource({ 46,63,69,79 });
+			npc->SetRectDraw({ 0,0, 69,79 });
 		}
 		else
 		{
-			npc.SetRectSource({ 1,63,42,76 });
-			npc.SetRectDraw({ 0,0, 42,76 });
+			npc->SetRectSource({ 1,63,42,76 });
+			npc->SetRectDraw({ 0,0, 42,76 });
 		}
 
-		npc.SetPosition(JVector2(50 + iNpc * 150, 50));
+		npc->SetPosition(JVector2(50 + iNpc * 150, 50));
 
-		npc.m_pVShader = pVShader;
-		npc.m_pPShader = pPShader;
+		npc->m_pVShader = pVShader;
+		npc->m_pPShader = pPShader;
 
-		if (!npc.Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
+		if (!npc->Create(m_pd3dDevice.Get(), m_pImmediateContext.Get(),
 			nullptr,
 			L"../../data/bitmap1.bmp",
 			L"../../data/bitmap2.bmp"))
@@ -113,11 +114,11 @@ bool	Sample::Frame()
 
 	for (int iObj = 0; iObj < m_NpcLlist.size(); iObj++)
 	{
-		RECT rt = m_NpcLlist[iObj].m_rtDraw;
+		RECT rt = m_NpcLlist[iObj]->m_rtDraw;
 		rt.right = rt.right + (cos(g_fGameTimer) * 0.5f + 0.5f) * 50.0f;
 		rt.bottom = rt.bottom + (cos(g_fGameTimer) * 0.5f + 0.5f) * 50.0f;
-		m_NpcLlist[iObj].UpdateRectDraw(rt);
-		m_NpcLlist[iObj].Frame();
+		m_NpcLlist[iObj]->UpdateRectDraw(rt);
+		m_NpcLlist[iObj]->Frame();
 	}
 
 	int iChatCnt = m_Net.m_PlayerUser.m_packetPool.size();
@@ -182,7 +183,7 @@ bool	Sample::Render()
 	
 	for (int iObj = 0; iObj < m_NpcLlist.size(); iObj++)
 	{
-		m_NpcLlist[iObj].Render();
+		m_NpcLlist[iObj]->Render();
 	}
 	m_PlayerObj.Render();
 	return true;
@@ -192,7 +193,7 @@ bool	Sample::Release()
 	
 	for (int iObj = 0; iObj < m_NpcLlist.size(); iObj++)
 	{
-		m_NpcLlist[iObj].Release();
+		m_NpcLlist[iObj]->Release();
 	}
 	m_PlayerObj.Release();
 

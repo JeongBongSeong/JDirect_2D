@@ -32,6 +32,10 @@ void JObject2D::AddPosition(JVector2 vPos)
 	}
 	
 }
+void JObject2D::UpdateRectSource(RECT rt)
+{
+	m_rtSource = rt;
+}
 void JObject2D::SetPosition(JVector2 vPos)
 {
 	m_vPos = vPos;

@@ -18,7 +18,7 @@ public:
 public:
 	JPlayerObj2D		m_PlayerObj;
 public:
-	vector<JObjectNpc2D> m_NpcLlist;
+	vector<JObjectNpc2D*> m_NpcLlist;
 public:
 	virtual bool	Init()  override;
 	virtual bool	Frame()  override;

@@ -70,6 +70,7 @@ bool JZoneWorld::Frame()
 	//m_SoundMgr.GetPtr(L"OnlyLove.MP3")->Play();
 	//JSound* pSound = I_Sound.GetPtr(L"BattleCityBGM.mp3");
 	//pSound->Frame();
+	
 	if (JInput::Get().GetKey('Z') == KEY_PUSH)
 	{
 		//pSound->Stop();

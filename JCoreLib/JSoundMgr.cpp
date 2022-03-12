@@ -21,6 +21,15 @@ void JSound::Play(bool bLoop)
 	}
 
 }
+bool JSound::isPlaying()
+{
+	bool bPlay = false;
+	if (m_pChannel != nullptr)
+	{
+		m_pChannel->isPlaying(&bPlay);
+	}
+	return bPlay;
+}
 void JSound::PlayEffect(bool bLoop)
 {
 	FMOD::Channel* pChannel = nullptr;

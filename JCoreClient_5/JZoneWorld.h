@@ -2,7 +2,7 @@
 #include"JWorld.h"
 #include "JPlayerObj2D.h"
 #include "JObjectNpc2D.h"
-#include "JSound.h"
+#include "JSoundMgr.h"
 #include "JInput.h"
 
 class JZoneWorld : public JWorld

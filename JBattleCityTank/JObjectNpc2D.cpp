@@ -3,7 +3,28 @@ void JObjectNpc2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
 {
     if (dwState == JCollisionType::Overlap)
     {
-        pObj->m_bAlphaBlend = FALSE;
+        //pObj->m_bAlphaBlend = !pObj->m_bAlphaBlend;
+    }
+}
+
+void JObjectNpc2D::HitSelect(JBaseObject* pObj, DWORD dwState)
+{
+    if (m_dwSelectState & J_HOVER)
+    {
+        INT K = 0;
+    }
+    if (m_dwSelectState & J_FOCUS)
+    {
+        INT K = 0;
+    }
+    if (m_dwSelectState & J_ACTIVE)
+    {
+        INT K = 0;
+    }
+    if (m_dwSelectState & J_SELECTED)
+    {
+        m_bSelect = true;
+        m_bDead = true;
     }
 }
 
@@ -41,7 +62,9 @@ JObjectNpc2D::JObjectNpc2D()
 {
     m_vDirection.x = (rand()%2 == 0) ? 1.0f : -1.0f;
     m_vDirection.y = (rand() % 2 == 0) ? 1.0f : -1.0f;
-    m_fSpeed = 50.0f;
+    m_fSpeed = 20.0f + (rand() % 300); //50.0f;
+    m_dwCollisionType = JCollisionType::Overlap;
+    m_dwSelectType = JSelectType::Select_Overlap;
 }
 
 JObjectNpc2D::~JObjectNpc2D()

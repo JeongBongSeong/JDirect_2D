@@ -66,15 +66,14 @@ bool JObjectMgr::Frame()
 	{
 		JBaseObject* pObjSrc = (JBaseObject*)src.second;
 		if (pObjSrc->m_dwCollisionType == JSelectType::Select_Ignore) continue;
-		DWORD dwState = JSelectState::J_DEFAULT;
-
-
+		DWORD dwState = JCollisionType::Overlap;
 
 		for (auto dest : m_ObjectList)
 		{
 			JBaseObject* pObjDest = (JBaseObject*)dest.second;
 			if (pObjSrc == pObjDest) continue;
-			if (JCollision::ToRect(pObjSrc->m_rtCollision, pObjDest->m_rtCollision))
+			if (pObjSrc->m_bDead) continue;
+			if (JCollision::RectToRect(pObjSrc->m_rtCollision, pObjDest->m_rtCollision))
 			{
 				FunctionIterator colliter = m_fnCollisionExecute.find(pObjSrc->m_iCollisionID);
 				if (colliter != m_fnCollisionExecute.end())

@@ -18,6 +18,7 @@ public:
 	virtual void AddPosition(JVector2 vPos);
 	virtual void SetPosition(JVector2 vPos);
 	virtual void UpdateRectDraw(RECT rt);
+	virtual void UpdateRectSource(RECT rt);
 
 	// 화면좌표 위치를 중점으로 NDC 변환
 	virtual void Convert(JVector2 center, float fWidth, float fHeight, std::vector<SimpleVertex>& retList);

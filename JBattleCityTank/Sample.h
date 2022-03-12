@@ -1,9 +1,6 @@
 #pragma once
 #include"JCore.h"
 #include "JAsyncSelect.h"
-#include "JPlayerObj2D.h"
-#include "JObjectNpc2D.h"
-#include "JSoundMgr.h"
 #include "JIntroWorld.h"
 #include "JLoginWorld.h"
 #include "JZoneWorld.h"
@@ -12,7 +9,7 @@ class Sample : public JCore
 {
 public:
 	JIntroWorld m_IntroWorld;
-	JLoginWorld m_LoginWorld;
+	//JLoginWorld m_LoginWorld;
 	JZoneWorld m_ZoneWorld;
 public:
 	JAsyncSelect		m_Net;
@@ -25,6 +22,7 @@ public:
 public:
 	virtual void	CreateResizeDevice(UINT iWidth, UINT iHeight) override;
 	virtual void	DeleteResizeDevice(UINT iWidth, UINT iHeight) override;
+
 public:
 	virtual bool	Init()  override;
 	virtual bool	Frame()  override;

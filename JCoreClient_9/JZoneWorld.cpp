@@ -31,7 +31,8 @@ bool JZoneWorld::Load(std::wstring filename)
 
 	for (int iNpc = 0; iNpc < 10; iNpc++)
 	{
-		JObjectNpc2D* npc = new JObjectNpc2D;
+		std::shared_ptr<JObjectNpc2D> npc =
+			std::make_shared<JObjectNpc2D>();
 		npc->m_csName = L"NPC_";
 		npc->m_csName += std::to_wstring(iNpc);
 		npc->Init();
@@ -55,7 +56,7 @@ bool JZoneWorld::Load(std::wstring filename)
 		{
 			return false;
 		}
-		m_NpcObj.insert(std::make_pair(npc->m_csName, npc));
+		m_NpcObj.push_back(npc);
 	}
 
 
