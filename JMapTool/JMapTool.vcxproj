@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{24e28d82-91cf-4296-80a6-2cec67cdf975}</ProjectGuid>
-    <RootNamespace>JBattleCityTank</RootNamespace>
+    <ProjectGuid>{800c2407-bac8-4aa8-b1fc-a08af16ba781}</ProjectGuid>
+    <RootNamespace>JMapTool</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -79,7 +79,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>..\\..\\output\\Debug\\</OutDir>
-    <IntDir>..\\..\\output\\Debug\\JBattleCityTank\\</IntDir>
+    <IntDir>..\\..\\output\\Debug\\JCoreClient_11\\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -144,50 +144,35 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="JAttackObj2D.cpp" />
     <ClCompile Include="JEffectObj.cpp" />
     <ClCompile Include="JIntroWorld.cpp" />
     <ClCompile Include="JLoginWorld.cpp" />
-    <ClCompile Include="JMap.cpp" />
     <ClCompile Include="JObjectNpc2D.cpp" />
     <ClCompile Include="JPlayerObj2D.cpp" />
     <ClCompile Include="JSprite.cpp" />
-    <ClCompile Include="JTileMap.cpp" />
-    <ClCompile Include="JTileObj2D.cpp" />
     <ClCompile Include="JUIModelMgr.cpp" />
     <ClCompile Include="JUIObject.cpp" />
     <ClCompile Include="JZoneWorld.cpp" />
     <ClCompile Include="Sample.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="JAttackObj2D.h" />
     <ClInclude Include="JEffectObj.h" />
     <ClInclude Include="JIntroWorld.h" />
     <ClInclude Include="JLoginWorld.h" />
-    <ClInclude Include="JMap.h" />
     <ClInclude Include="JObjectNpc2D.h" />
     <ClInclude Include="JPlayerObj2D.h" />
     <ClInclude Include="JSprite.h" />
-    <ClInclude Include="JTileMap.h" />
-    <ClInclude Include="JTileObj2D.h" />
     <ClInclude Include="JUIModelMgr.h" />
     <ClInclude Include="JUIObject.h" />
     <ClInclude Include="JZoneWorld.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Sample.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\data\shader\DefaultUI.txt" />
-    <Text Include="AtackEffectData.txt" />
-    <Text Include="CannonballData.txt" />
-    <Text Include="NpcData.txt" />
     <Text Include="PixelShader.txt" />
     <Text Include="Player.txt" />
     <Text Include="SpriteData.txt" />
-    <Text Include="Tile.txt" />
     <Text Include="VertexShader.txt" />
     <Text Include="Shader.txt" />
-    <Text Include="PlayerData.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\JCoreLib\JCoreLib.vcxproj">
@@ -196,9 +181,6 @@
     <ProjectReference Include="..\JCoreNetwork\JCoreNetwork.vcxproj">
       <Project>{b2318c08-69da-4f01-83bc-ec65ab73a646}</Project>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="JBattleCityTank.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

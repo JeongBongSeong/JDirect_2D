@@ -85,7 +85,7 @@ void JPlayerTank::Anime(JVector2 pos)
 		if (m_iCurrentIndex >= m_pSprite->m_rtArray.size())
 		{
 			m_iCurrentIndex = 0;
-			m_bDead = true;
+			//m_bDead = true;
 		}
 		m_fTimer -= m_fChangeTime;
 		SetRectSource(m_pSprite->m_rtArray[m_iCurrentIndex]);
@@ -127,7 +127,7 @@ bool JPlayerTank::Frame()
 	{
 		JVector2 pos;
 		//UpdateRectSource();
-		if (m_vPos.y < g_rtClient.top + 40.0f)
+		if (m_vPos.y < m_rtIngame.top + 30.0f)
 		{
 			pos.y = 0;
 		}
@@ -142,7 +142,7 @@ bool JPlayerTank::Frame()
 	else if (JInput::Get().GetKey(VK_LEFT) == KEY_HOLD)
 	{
 		JVector2 pos;
-		if (m_vPos.x < g_rtClient.left + 40.0f)
+		if (m_vPos.x < m_rtIngame.left + 30.0f)
 		{
 			pos.x = 0;
 		}
@@ -157,7 +157,7 @@ bool JPlayerTank::Frame()
 	else if (JInput::Get().GetKey(VK_DOWN) == KEY_HOLD)
 	{
 		JVector2 pos;
-		if (m_vPos.y > g_rtClient.bottom - 40.0f)
+		if (m_vPos.y > m_rtIngame.bottom - 30.0f)
 		{
 			pos.y = 0;
 		}
@@ -172,7 +172,7 @@ bool JPlayerTank::Frame()
 	else if (JInput::Get().GetKey(VK_RIGHT) == KEY_HOLD)
 	{
 		JVector2 pos;
-		if (m_vPos.x > g_rtClient.right - 40.0f)
+		if (m_vPos.x > m_rtIngame.right - 30.0f)
 		{
 			pos.x = 0;
 		}

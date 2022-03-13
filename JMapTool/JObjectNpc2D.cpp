@@ -23,34 +23,33 @@ void JObjectNpc2D::HitSelect(JBaseObject* pObj, DWORD dwState)
     }
     if (m_dwSelectState & J_SELECTED)
     {
-        INT K = 0;
-        //m_bSelect = true;
-        //m_bDead = true;
+        m_bSelect = true;
+        m_bDead = true;
     }
 }
 
 bool JObjectNpc2D::Frame()
 {
     JVector2 p;
-    if (m_vPos.x > m_rtIngame.right - 30.0f)
+    if (m_vPos.x > g_rtClient.right - 40.0f)
     {
         m_vDirection.x = m_vDirection.x * -1.0f;
-        m_vPos.x = m_rtIngame.right - 30.0f;
+        m_vPos.x = g_rtClient.right - 40.0f;
     }
-    if (m_vPos.x < m_rtIngame.left + 30.0f)
+    if (m_vPos.x < g_rtClient.left + 40.0f)
     {
         m_vDirection.x = m_vDirection.x * -1.0f;
-        m_vPos.x = m_rtIngame.left + 30.0f;
+        m_vPos.x = g_rtClient.left + 40.0f;
     }
-    if (m_vPos.y > m_rtIngame.bottom - 30.0f)
+    if (m_vPos.y > g_rtClient.bottom - 40.0f)
     {
         m_vDirection.y = m_vDirection.y * -1.0f;
-        m_vPos.y = m_rtIngame.bottom - 30.0f;
+        m_vPos.y = g_rtClient.bottom - 40.0f;
     }
-    if (m_vPos.y < m_rtIngame.top + 30.0f)
+    if (m_vPos.y < g_rtClient.top + 40.0f)
     {
         m_vDirection.y = m_vDirection.y * -1.0f;
-        m_vPos.y = m_rtIngame.top + 30.0f;
+        m_vPos.y = g_rtClient.top + 40.0f;
     }
 
     p = m_vDirection * (m_fSpeed * g_fSecPerFrame);

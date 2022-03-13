@@ -9,7 +9,7 @@ public:
 	RECT m_rtWindow;
 public:
 	WORD MyRegisterClass(HINSTANCE hInstance);
-	BOOL SetWindow(const WCHAR* szTitle = L"Defalut", int iWidth = 800, int iHeight = 600);
+	BOOL SetWindow(const WCHAR* szTitle = L"Battle City Tank", int iWidth = 1152, int iHeight = 864);
 	bool WinRun();
 	virtual LRESULT  MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	virtual void     ResizeDevice(UINT iWidth, UINT iHeight);

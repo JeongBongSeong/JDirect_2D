@@ -1,6 +1,7 @@
 #include "JCore.h"
 #include "JObjectMgr.h"
 #include "JSoundMgr.h"
+JVector4   g_fBackGroundColor;
 
 bool JCore::CoreInit()
 {
@@ -60,9 +61,11 @@ bool JCore::CoreFrame()
 
 bool JCore::CoreRender()
 {
-    //float color[4] = { 0.7543f, 0.33421f, 0.8323f,1.0f };
-    float color[4] = { 1,1,1,1.0f };
-    m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView.Get(), color);
+    m_fColor[0] = g_fBackGroundColor.x;
+    m_fColor[1] = g_fBackGroundColor.y;
+    m_fColor[2] = g_fBackGroundColor.z;
+    m_fColor[3] = g_fBackGroundColor.w;
+    m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView.Get(), m_fColor);
     m_pImmediateContext->PSSetSamplers(0, 1, &JDxState::m_pSamplerState);
 
     Render();

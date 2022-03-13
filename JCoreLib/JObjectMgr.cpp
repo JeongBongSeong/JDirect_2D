@@ -15,7 +15,13 @@ void JObjectMgr::AddSelectExecute(JBaseObject* owner, CollisionFunction func)
 	m_SelectList.insert(std::make_pair(owner->m_iSelectID, owner));
 	m_fnSelectExecute.insert(std::make_pair(owner->m_iSelectID, func));
 }
-
+void JObjectMgr::AddPlayerCollisionExecute(JBaseObject* owner, CollisionPlayerFunction func)
+{
+	owner->m_iCollisionPlayerID = m_iExecuteCollisionPlayerID++;
+	//1번부터 들어간다.
+	m_PlayerObjectList.insert(std::make_pair(owner->m_iCollisionPlayerID, owner));
+	m_fnCollisionPlayerExecute.insert(std::make_pair(owner->m_iCollisionPlayerID, func));
+}
 void JObjectMgr::DeleteCollisionExecute(JBaseObject* owner)
 {
 	std::map<int, JBaseObject*>::iterator objiter;
@@ -46,6 +52,21 @@ void JObjectMgr::DeleteSelectExecute(JBaseObject* owner)
 		m_fnSelectExecute.erase(colliter);
 	}
 }
+void JObjectMgr::DeletePlayerCollisionExecute(JBaseObject* owner)
+{
+	std::map<int, JBaseObject*>::iterator objiter;
+	objiter = m_PlayerObjectList.find(owner->m_iCollisionPlayerID);
+	if (objiter != m_PlayerObjectList.end())
+	{
+		m_PlayerObjectList.erase(objiter);
+	}
+
+	FunctionIterator colliter = m_fnCollisionExecute.find(owner->m_iCollisionPlayerID);
+	if (colliter != m_fnCollisionExecute.end())
+	{
+		m_fnCollisionExecute.erase(colliter);
+	}
+}
 bool JObjectMgr::Init()
 {
 	return true;
@@ -73,10 +94,36 @@ bool JObjectMgr::Frame()
 			JBaseObject* pObjDest = (JBaseObject*)dest.second;
 			if (pObjSrc == pObjDest) continue;
 			if (pObjSrc->m_bDead) continue;
+			if (pObjDest->m_bDead) continue;
 			if (JCollision::RectToRect(pObjSrc->m_rtCollision, pObjDest->m_rtCollision))
 			{
 				FunctionIterator colliter = m_fnCollisionExecute.find(pObjSrc->m_iCollisionID);
 				if (colliter != m_fnCollisionExecute.end())
+				{
+					CollisionFunction call = colliter->second;
+					call(pObjDest, dwState);
+				}
+			}
+		}
+	}
+	// Player collision check
+	for (auto src : m_PlayerObjectList)
+	{
+		JBaseObject* pObjSrc = (JBaseObject*)src.second;
+		if (pObjSrc->m_dwCollisionType == JSelectType::Select_Ignore) continue;
+		DWORD dwState = JCollisionType::Overlap;
+
+		for (auto dest : m_PlayerObjectList)
+		{
+			JBaseObject* pObjDest = (JBaseObject*)dest.second;
+			if (pObjSrc == pObjDest) continue;
+			if (pObjSrc->m_bDead) continue;
+			if (pObjDest->m_bDead) continue;
+			if (pObjSrc->m_csName == pObjDest->m_csName) continue;
+			if (JCollision::RectToRect(pObjSrc->m_rtCollision, pObjDest->m_rtCollision))
+			{
+				FunctionIterator colliter = m_fnCollisionPlayerExecute.find(pObjSrc->m_iCollisionPlayerID);
+				if (colliter != m_fnCollisionPlayerExecute.end())
 				{
 					CollisionFunction call = colliter->second;
 					call(pObjDest, dwState);

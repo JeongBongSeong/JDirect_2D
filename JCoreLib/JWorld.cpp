@@ -28,7 +28,16 @@ bool JWorld::Frame()
 			pObj->Frame();
 		}
 	}
+	for (auto obj : m_MapObj)
+	{
+		JObject2D* pObj = obj.get();
+		if (pObj != nullptr)
+		{
+			pObj->Frame();
+		}
+	}
 	return true;
+	
 }
 bool JWorld::Render()
 {
@@ -41,6 +50,14 @@ bool JWorld::Render()
 		}
 	}
 	for (auto obj : m_NpcObj)
+	{
+		JObject2D* pObj = obj.get();
+		if (pObj->m_bDead == false)
+		{
+			pObj->Render();
+		}
+	}
+	for (auto obj : m_MapObj)
 	{
 		JObject2D* pObj = obj.get();
 		if (pObj->m_bDead == false)

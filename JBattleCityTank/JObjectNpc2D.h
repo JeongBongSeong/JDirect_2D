@@ -4,6 +4,8 @@
 class JObjectNpc2D : public JObject2D
 {
 public:
+	RECT m_rtIngame = {0,0,0,0};
+public:
 	bool Frame() override;
 public:
 	void HitOverlap(JBaseObject* pObj, DWORD dwState);

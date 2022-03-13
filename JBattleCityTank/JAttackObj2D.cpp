@@ -7,64 +7,69 @@ void JAttackObj2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
     if (dwState == JCollisionType::Overlap)
     {
         pObj->m_bDead = true;
+        m_bDead=true;
+        //
+        
+        //타겟탱크위치 폭발 이펙트 
+        //pObj->m_vPos
     }
 }
 
-void JAttackObj2D::HitSelect(JBaseObject* pObj, DWORD dwState)
+void JAttackObj2D::SetEffect()
 {
-    if (m_dwSelectState & J_HOVER)
-    {
-        INT K = 0;
-    }
-    if (m_dwSelectState & J_FOCUS)
-    {
-        INT K = 0;
-    }
-    if (m_dwSelectState & J_ACTIVE)
-    {
-        INT K = 0;
-    }
-    if (m_dwSelectState & J_SELECTED)
-    {
-        m_bSelect = true;
-        m_bDead = true;
-    }
 }
+
+
 void JAttackObj2D::SettingPosition(JVector2* pos,JVector2 *dir)
 {
     m_vPos = *pos;
     m_vDirection = *dir;
-
 }
 bool JAttackObj2D::Frame()
 {
+    if (m_bDead == true) return false;
     JVector2 p;
-    //if (m_vPos.y < g_rtClient.top)      //위로
-    //{
-    //    m_vDirection.y = m_vDirection.y * -1.0f;
-    //    m_vPos.y = g_rtClient.top + 40.0f;
-    //}
-    //if (m_vPos.x > g_rtClient.right)    //오른쪽
-    //{
-    //    m_vDirection.x = m_vDirection.x * -1.0f;
-    //    m_vPos.x = g_rtClient.right - 40.0f;
-    //}
-    //if (m_vPos.x < g_rtClient.left)     //왼쪽
-    //{
-    //    m_vDirection.x = m_vDirection.x * -1.0f;
-    //    m_vPos.x = g_rtClient.left + 40.0f;
-    //}
-    //
-  
-    //if (m_vPos.y > g_rtClient.bottom)   //아래로
-    //{
-    //    m_vDirection.y = m_vDirection.y * -1.0f;
-    //    m_vPos.y = g_rtClient.bottom - 40.0f;
-    //}
-    p = m_vDirection * (m_fSpeed * g_fSecPerFrame);
+    if (m_vPos.y < m_rtIngame.top)      //위로
+    {
+        m_bDead = true;
+        return true;
+    }
+    if (m_vPos.x > m_rtIngame.right)    //오른쪽
+    {
+        m_bDead = true;
+        return true;
+    }
+    if (m_vPos.x < m_rtIngame.left)     //왼쪽
+    {
+        m_bDead = true;
+        return true;
+    }  
+    if (m_vPos.y > m_rtIngame.bottom)   //아래로
+    {
+        m_bDead = true;
+        return true;
+    }
 
+    if (m_vDirection == JVector2(0,-1)) //위
+    {
+        SetRectSource({ 323, 102, 3, 4 });
+    }
+    if (m_vDirection == JVector2(0, 1)) //아래
+    {
+        SetRectSource({ 339, 102, 3, 4 });
+    }
+    if (m_vDirection == JVector2(-1, 0)) // 왼쪽
+    {
+        SetRectSource({ 330, 102, 4, 3 });
+    }
+    if (m_vDirection == JVector2(1, 0)) // 오른쪽
+    {
+        SetRectSource({ 346, 102, 4, 3 });
+    }
+
+    p = m_vDirection * (m_fSpeed * g_fSecPerFrame);
     AddPosition(p);
-    return false;
+    return true;
 }
 
 JAttackObj2D::JAttackObj2D()

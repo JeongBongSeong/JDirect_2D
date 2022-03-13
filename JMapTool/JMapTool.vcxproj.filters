@@ -22,9 +22,6 @@
     <Filter Include="Object">
       <UniqueIdentifier>{84bcbf4f-4e9e-44ce-8660-c02676503c59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{f45c354c-11ce-4471-a3a0-e73388ef4522}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Sample.cpp">
@@ -56,18 +53,6 @@
     </ClCompile>
     <ClCompile Include="JUIModelMgr.cpp">
       <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="JAttackObj2D.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="JMap.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="JTileMap.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="JTileObj2D.cpp">
-      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,21 +86,6 @@
     <ClInclude Include="JUIModelMgr.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="JAttackObj2D.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="JMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="JTileMap.h">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="JTileObj2D.h">
-      <Filter>Map</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="PixelShader.txt">
@@ -133,28 +103,5 @@
     <Text Include="SpriteData.txt">
       <Filter>텍스트 파일</Filter>
     </Text>
-    <Text Include="..\..\data\shader\DefaultUI.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-    <Text Include="PlayerData.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-    <Text Include="NpcData.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-    <Text Include="AtackEffectData.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-    <Text Include="CannonballData.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-    <Text Include="Tile.txt">
-      <Filter>텍스트 파일</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="JBattleCityTank.rc">
-      <Filter>리소스 파일</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

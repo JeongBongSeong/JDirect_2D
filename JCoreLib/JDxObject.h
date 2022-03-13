@@ -43,6 +43,7 @@ public:
 public:
 	JBaseObject* m_pParent = nullptr;
 	bool m_bDead;
+	int m_iCollisionPlayerID;
 	int m_iCollisionID;
 	int m_iSelectID;
 	float m_fSpeed;
@@ -74,6 +75,7 @@ public:
 		m_bSelect = false;
 		m_bAlphaBlend = true;
 		m_dwSelectState = J_DEFAULT;
+		m_iCollisionPlayerID = -1;
 		m_iCollisionID = -1;
 		m_iSelectID = -1;
 		m_vDirection.x = 0.0f;

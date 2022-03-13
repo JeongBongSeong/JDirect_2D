@@ -10,6 +10,7 @@ class JCore : public JDevice
 public:
 	JTimer m_GameTimer;
 	JWriteFont m_dxWrite;
+	float m_fColor[4];
 public:
 	//게임 반복 전 실행
 	bool CoreInit();

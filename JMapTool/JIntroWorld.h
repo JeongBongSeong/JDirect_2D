@@ -15,7 +15,7 @@ class JIntroWorld : public JWorld
 public:
 	//JSprite m_SpriteObj;
 	JButtonObject* m_btnObj;
-	//JEffectObj m_ExplosionObj;
+	JEffectObj m_ExplosionObj;
 	JSound* m_pBackGroundMusic;
 	JTexture* m_pChangeColorTex[10];
 	JTexture* m_pColorTex;
