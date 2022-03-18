@@ -6,8 +6,8 @@ void JAttackObj2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
 {
     if (dwState == JCollisionType::Overlap)
     {
-
         pObj->m_bCheck = true;
+        pObj->m_bDead = true;
         m_bDead=true;
         //
         

@@ -64,6 +64,7 @@ public:
 	float m_fTimer = 0.0f;
 	float m_fAttackTime = 0.0f;
 	float m_fWaitTime = 0.0f;		//ÄðÅ¸ÀÓ
+	float m_fWaitTime = 1.0f;
 	RECT m_rtIngame;
 public:
 	JVector2 m_vDirection;

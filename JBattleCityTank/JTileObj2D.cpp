@@ -14,6 +14,8 @@ void JTileObj2D::HitOverlap(JBaseObject* pObj, DWORD dwState)
         //Å¸°ÙÅÊÅ©À§Ä¡ Æø¹ß ÀÌÆåÆ® 
         
         //pObj->m_fSpeed = 0;
+        //pObj->m_vPos
+        pObj->m_fSpeed = 0;
     }
     
 }

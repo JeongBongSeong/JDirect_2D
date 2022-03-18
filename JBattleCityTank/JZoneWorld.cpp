@@ -69,6 +69,7 @@ bool JZoneWorld::Load(std::wstring filename)
 	}
 	m_PlayerObj.m_rtIngame = m_rtIngame;
 	for (int iNpc = 0; iNpc < 20; iNpc++)
+	for (int iNpc = 0; iNpc < 10; iNpc++)
 	{
 		std::shared_ptr<JObjectNpc2D> npc = 
 			std::make_shared<JObjectNpc2D>();
@@ -144,7 +145,7 @@ bool JZoneWorld::Load(std::wstring filename)
 	{
 		return false;
 	}
-	for (int iCannonBall = 0; iCannonBall < 50; iCannonBall++)
+	for (int iCannonBall = 0; iCannonBall < 3; iCannonBall++)
 	{
 		std::shared_ptr<JAttackObj2D> CannonBall =
 			std::make_shared<JAttackObj2D>();

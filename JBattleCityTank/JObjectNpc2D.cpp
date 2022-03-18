@@ -54,6 +54,7 @@ bool JObjectNpc2D::Frame()
     m_NpcAttackExplosionObj.SetTargetPosition(&m_vPos);
     
     JVector2 pos;
+    JVector2 p;
     if (m_vPos.x > m_rtIngame.right - 30.0f)
     {
         m_vDirection.x = m_vDirection.x * -1.0f;

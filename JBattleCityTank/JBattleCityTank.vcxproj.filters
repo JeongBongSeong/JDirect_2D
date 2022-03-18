@@ -68,6 +68,7 @@
     </ClCompile>
     <ClCompile Include="JTileObj2D.cpp">
       <Filter>Object</Filter>
+      <Filter>Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +116,7 @@
     </ClInclude>
     <ClInclude Include="JTileObj2D.h">
       <Filter>Object</Filter>
+      <Filter>Map</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -132,6 +132,7 @@ bool JIntroWorld::Load(std::wstring filename)
 	JUIModel* pNewBK = I_UI.GetPtr(L"bk")->Clone();// new JButtonObject(*I_UI.GetPtr(L"btnStart"));
 	pNewBK->m_csName = L"JImageObjectClock:bk";
 	pNewBK->SetPosition(JVector2(g_rtClient.right/2, 200));
+	pNewBK->SetPosition(JVector2(g_rtClient.right/2, 150));
 	pNewBK->UpdateData();
 	m_UIObj.push_back(std::shared_ptr<JObject2D>(pNewBK));
 
