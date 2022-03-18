@@ -16,18 +16,31 @@
 #include <queue>
 #include"JCollision.h"
 #include <wrl.h> 
-
+#include"JMatrix.h"
 #pragma comment (lib,"d3d11.lib")
 #pragma comment (lib,"D3DCompiler.lib")
 #pragma comment (lib,"DirectXTK.lib")
 using namespace std;
 using namespace Microsoft::WRL;
 
+#define JBASIS_EPSILON		((FLOAT)  0.001f)
+#define JBASIS_PI			((FLOAT)  3.141592654f)
+#define DegreeToRadian( degree ) ((degree) * (JBASIS_PI / 180.0f))
+#define RadianToDegree( radian ) ((radian) * (180.0f / JBASIS_PI))
+#define MAKECOLOR_ARGB(a, r, g, b)			(((a)&0xff)<<24)|(((r)&0xff)<<16)|(((g)&0xff)<<8)|((b)&0xff)
+#define IS_IN_RANGE(value,r0,r1) (( ((r0) <= (value)) && ((value) <= (r1)) ) ? 1 : 0)
+
+#define randf(x) (x*rand()/(float)RAND_MAX)
+#define randf2(x,off) (off+x*rand()/(float)RAND_MAX)
+#define randstep(fMin,fMax) (fMin+((float)fMax-(float)fMin)*rand()/(float)RAND_MAX)
+#define clamp(x,MinX,MaxX) if (x>MaxX) x=MaxX; else if (x<MinX) x=MinX;
+
 extern RECT g_rtClient;
 extern HWND g_hWnd;
 
 extern float	g_fSecPerFrame;
 extern float	g_fGameTimer;
+extern JVector4	g_fBackGroundColor;
 extern POINT	g_ptMouse;
 
 static std::wstring to_mw(const std::string& _src)

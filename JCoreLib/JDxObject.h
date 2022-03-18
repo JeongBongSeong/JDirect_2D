@@ -2,12 +2,21 @@
 #include"JTextureMgr.h"
 #include"JShaderMgr.h"
 #include "JDxState.h"
+#include "JCollision.h"
 
 struct SimpleVertex
 {
 	JVector2 v;
 	JVector2 t;
 };
+struct JVertex
+{
+	JVector3 p;
+	JVector3 n;
+	JVector4 c;
+	JVector2 t;
+};
+
 enum JCollisionType
 {
 	Block = 0,
@@ -43,12 +52,12 @@ public:
 public:
 	JBaseObject* m_pParent = nullptr;
 	bool m_bDead;
+	bool m_bCheck;
+	int m_iCollisionPlayerID;
 	int m_iCollisionID;
 	int m_iSelectID;
 	float m_fSpeed;
 	float m_fCurrentSpeed;
-	JVector2 m_vPos;
-	JVector2 m_vDirection;
 	float m_fWidth;
 	float m_fHeight;
 	JRect m_rtCollision;
@@ -70,14 +79,14 @@ public:
 public:
 	JBaseObject()
 	{
+		m_bCheck = false;
 		m_bDead = false;
 		m_bSelect = false;
 		m_bAlphaBlend = true;
 		m_dwSelectState = J_DEFAULT;
+		m_iCollisionPlayerID = -1;
 		m_iCollisionID = -1;
 		m_iSelectID = -1;
-		m_vDirection.x = 0.0f;
-		m_vDirection.y = 0.0f;
 		m_dwCollisionType = JCollisionType::Ignore;
 		m_dwSelectType = JSelectType::Select_Ignore;
 		m_fCurrentSpeed = 0;
@@ -94,6 +103,10 @@ struct JIndex
 
 struct JConstantData
 {
+	JMatrix matWorld;
+	JMatrix matView;
+	JMatrix matProj;
+
 	JVector4 Color;
 	JVector4 Timer;
 };
@@ -111,7 +124,8 @@ public:
 
 public:
 	std::vector<SimpleVertex> m_InitScreenList;
-	std::vector<SimpleVertex> m_VertexList;
+	//std::vector<SimpleVertex> m_VertexList;
+	std::vector<JVertex> m_VertexList;
 	ID3D11Buffer* m_pVertexBuffer = nullptr;
 
 	std::vector<DWORD> m_IndexList;

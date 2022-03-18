@@ -3,9 +3,12 @@
 class JObject2D : public JDxObject
 {
 public:
+	std::vector<SimpleVertex> m_VertexList2D;
 	RECT	m_rtSource;
 	RECT	m_rtDraw;
 	JVector4			m_vColor;
+	JVector2	m_vPos;
+	JVector2	m_vDirection;
 public:
 	float  m_fAlpha = 0.0f;
 	bool   m_bFadeIn = false;

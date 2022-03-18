@@ -170,6 +170,7 @@ copy "*.h" "..\\..\\JCoreLib\\include"</Command>
     <ClCompile Include="JDxObject.cpp" />
     <ClCompile Include="JDxState.cpp" />
     <ClCompile Include="JInput.cpp" />
+    <ClCompile Include="JMatrix.cpp" />
     <ClCompile Include="JObject2D.cpp" />
     <ClCompile Include="JObject3D.cpp" />
     <ClCompile Include="JObjectMgr.cpp" />
@@ -191,6 +192,7 @@ copy "*.h" "..\\..\\JCoreLib\\include"</Command>
     <ClInclude Include="JDxObject.h" />
     <ClInclude Include="JDxState.h" />
     <ClInclude Include="JInput.h" />
+    <ClInclude Include="JMatrix.h" />
     <ClInclude Include="JObject2D.h" />
     <ClInclude Include="JObject3D.h" />
     <ClInclude Include="JObjectMgr.h" />

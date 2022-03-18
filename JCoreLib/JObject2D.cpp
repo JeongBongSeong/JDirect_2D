@@ -28,7 +28,7 @@ void JObject2D::AddPosition(JVector2 vPos)
 	SetIndexData();
 	if (m_pContext != nullptr)
 	{
-		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0);
+		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList2D.at(0), 0, 0);
 	}
 	
 }
@@ -49,7 +49,7 @@ void JObject2D::SetPosition(JVector2 vPos)
 	SetIndexData();
 	if (m_pContext != nullptr)
 	{
-		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList.at(0), 0, 0);
+		m_pContext->UpdateSubresource(m_pVertexBuffer, 0, NULL, &m_VertexList2D.at(0), 0, 0);
 	}
 }
 void JObject2D::Convert(JVector2 center, float fWidth, float fHeight, vector<SimpleVertex>& retList)
@@ -165,7 +165,7 @@ void	JObject2D::ConvertIndex(
 }
 bool    JObject2D::SetVertexData()
 {
-	ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList);
+	ConvertIndex(m_vPos, m_fWidth, m_fHeight, m_VertexList2D);
     return true;
 }
 bool    JObject2D::SetIndexData()

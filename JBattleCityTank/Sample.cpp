@@ -154,3 +154,16 @@ Sample::~Sample()
 {}
 
 RUN()
+
+//#include"JMap.h"
+//
+//int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPWSTR    lpCmdLine, int       nCmdShow)
+//{
+//	JMap a;
+//
+//
+//	a.CreateMap(26, 26, { 0, 0, 780, 780 });
+//	std::shared_ptr<JNode> b = a.FIndIndex(750, 750);
+//	
+//	return 0;
+//}

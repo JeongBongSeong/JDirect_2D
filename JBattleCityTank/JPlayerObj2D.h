@@ -30,18 +30,22 @@ public:
 	virtual void HitOverlap(JBaseObject* pObj, DWORD dwState);
 	bool	Frame() override;
 	//bool	Render() override;
-	/*void  UpdateData() override
+	void  UpdateData() override
 	{
 		m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
-		I_ObjectMgr.AddCollisionExecute(this,
+		I_ObjectMgr.AddPlayerCollisionExecute(this,
+			std::bind(&JBaseObject::HitOverlap, this,
+				std::placeholders::_1,
+				std::placeholders::_2));
+		/*I_ObjectMgr.AddCollisionExecute(this,
 			std::bind(&JBaseObject::HitOverlap, this,
 				std::placeholders::_1,
 				std::placeholders::_2));
 		I_ObjectMgr.AddSelectExecute(this,
 			std::bind(&JBaseObject::HitSelect, this,
 				std::placeholders::_1,
-				std::placeholders::_2));
-	}*/
+				std::placeholders::_2));*/
+	}
 public:
 	void UpdateRectSource(RECT rt) override;
 public:
@@ -58,6 +62,9 @@ public:
 	int m_iCurrentIndex = 0;
 	float m_fChangeTime = 0.0f;
 	float m_fTimer = 0.0f;
+	float m_fAttackTime = 0.0f;
+	float m_fWaitTime = 0.0f;		//ÄðÅ¸ÀÓ
+	RECT m_rtIngame;
 public:
 	JVector2 m_vDirection;
 	JVector2 m_vMuzzlePosition;

@@ -14,6 +14,10 @@ public:
 	//IDXGIFactory* m_pGIFactory;
 	ComPtr<ID3D11DeviceContext> m_pImmediateContext;
 	//ID3D11DeviceContext* m_pImmediateContext;// 다비이스 컨텍스트 객체
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> m_pDepthStencilView;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_pSRV;
+	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_pDsvSRV;// 깊이버퍼 리소스뷰
+
 
 	DXGI_SWAP_CHAIN_DESC	m_SwapChainDesc;	// 스왑체인 속성값
 	D3D11_VIEWPORT m_ViewPort;// 뷰 포트 속성값
@@ -21,10 +25,13 @@ public:
 	D3D_DRIVER_TYPE m_DriverType;
 	D3D_FEATURE_LEVEL m_FeatureLevel;	// Direct3D 특성레벨 속성값	
 	// 스왑체인 속성값
+	
+
 public:
 	virtual HRESULT InitDeivice();
 	virtual bool	CreateDevice();
 	virtual bool	CreateRenderTargetView();
+	virtual bool CreateDetphStencilView();
 	virtual bool	SetViewport();
 	virtual bool	CleapupDevice();
 public:

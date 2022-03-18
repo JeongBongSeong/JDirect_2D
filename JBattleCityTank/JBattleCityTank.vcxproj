@@ -148,9 +148,12 @@
     <ClCompile Include="JEffectObj.cpp" />
     <ClCompile Include="JIntroWorld.cpp" />
     <ClCompile Include="JLoginWorld.cpp" />
+    <ClCompile Include="JMap.cpp" />
     <ClCompile Include="JObjectNpc2D.cpp" />
     <ClCompile Include="JPlayerObj2D.cpp" />
     <ClCompile Include="JSprite.cpp" />
+    <ClCompile Include="JTileMap.cpp" />
+    <ClCompile Include="JTileObj2D.cpp" />
     <ClCompile Include="JUIModelMgr.cpp" />
     <ClCompile Include="JUIObject.cpp" />
     <ClCompile Include="JZoneWorld.cpp" />
@@ -161,12 +164,16 @@
     <ClInclude Include="JEffectObj.h" />
     <ClInclude Include="JIntroWorld.h" />
     <ClInclude Include="JLoginWorld.h" />
+    <ClInclude Include="JMap.h" />
     <ClInclude Include="JObjectNpc2D.h" />
     <ClInclude Include="JPlayerObj2D.h" />
     <ClInclude Include="JSprite.h" />
+    <ClInclude Include="JTileMap.h" />
+    <ClInclude Include="JTileObj2D.h" />
     <ClInclude Include="JUIModelMgr.h" />
     <ClInclude Include="JUIObject.h" />
     <ClInclude Include="JZoneWorld.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Sample.h" />
   </ItemGroup>
   <ItemGroup>
@@ -177,6 +184,7 @@
     <Text Include="PixelShader.txt" />
     <Text Include="Player.txt" />
     <Text Include="SpriteData.txt" />
+    <Text Include="Tile.txt" />
     <Text Include="VertexShader.txt" />
     <Text Include="Shader.txt" />
     <Text Include="PlayerData.txt" />
@@ -188,6 +196,9 @@
     <ProjectReference Include="..\JCoreNetwork\JCoreNetwork.vcxproj">
       <Project>{b2318c08-69da-4f01-83bc-ec65ab73a646}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="JBattleCityTank.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

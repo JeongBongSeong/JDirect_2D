@@ -15,6 +15,18 @@ JVector3::JVector3(const JVector3& v)
 	y = v.y;
 	z = v.z;
 }
+void JVector3::operator += (const JVector3& v)
+{
+	this->x += v.x;
+	this->y += v.y;
+	this->z += v.z;
+}
+void JVector3::operator -= (const JVector3& v)
+{
+	this->x -= v.x;
+	this->y -= v.y;
+	this->z -= v.z;
+}
 JVector3 JVector3::operator + (const JVector3& v)
 {
 	JVector3 ret;
@@ -105,4 +117,14 @@ float JVector3::Length()
 {
 	float ret = x * x + y * y + z * z;
 	return sqrt(ret);
+}
+
+float JVector3::operator | (JVector3 const& v)
+{
+	return x * v.x + y * v.y + z * v.z;
+}
+
+JVector3 JVector3::operator ^ (JVector3 const& v)
+{
+	return JVector3((y * v.z - z * v.y), (z * v.x - x * v.z), (x * v.y - y * v.x));
 }

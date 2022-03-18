@@ -33,9 +33,12 @@ bool    JDxObject::SetIndexData()
 bool    JDxObject::SetConstantData()
 {
 	ZeroMemory(&m_ConstantList, sizeof(JConstantData));
-	m_ConstantList.Color.x = 1.0f;
+	m_ConstantList.matWorld = JMatrix();
+	m_ConstantList.matView = JMatrix();
+	m_ConstantList.matProj = JMatrix();
+	m_ConstantList.Color.x = 0.0f;
 	m_ConstantList.Color.y = 1.0f;
-	m_ConstantList.Color.z = 1.0f;
+	m_ConstantList.Color.z = 0.0f;
 	m_ConstantList.Color.w = 1.0f;
 	m_ConstantList.Timer.x = 0.0f;
 	m_ConstantList.Timer.y = 1.0f;
@@ -59,11 +62,12 @@ bool JDxObject::CreatePixelShader(const TCHAR* szFile)
 }
 bool JDxObject::CreateVertexBuffer()
 {
+	if (m_VertexList.size() <= 0) return false;
 	HRESULT hr = S_OK;
 	D3D11_BUFFER_DESC bd;
 	{
 		ZeroMemory(&bd, sizeof(D3D11_BUFFER_DESC));
-		bd.ByteWidth = sizeof(SimpleVertex) * m_VertexList.size();		//이 크기에 메모리를 1
+		bd.ByteWidth = sizeof(JVertex) * m_VertexList.size();		//이 크기에 메모리를 1
 		bd.Usage = D3D11_USAGE_DEFAULT;				//GPU에 할당한다.    3
 		bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;	//버텍스 버퍼용으로  2
 	}
@@ -127,9 +131,10 @@ bool JDxObject::CreateInputLayout()
 {
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0},
-		{"TEXCOORD",0, DXGI_FORMAT_R32G32_FLOAT, 0,8,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		//{"COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"POSITION",0, DXGI_FORMAT_R32G32B32_FLOAT, 0,0,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{"NORMAL",0, DXGI_FORMAT_R32G32B32_FLOAT, 0,12,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{"COLOR",0, DXGI_FORMAT_R32G32B32A32_FLOAT, 0,24,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
+		{"TEXCOORD",0, DXGI_FORMAT_R32G32_FLOAT, 0,40,  D3D11_INPUT_PER_VERTEX_DATA, 0 },
 	};
 	UINT numLayout = sizeof(layout) / sizeof(layout[0]);
 	HRESULT hr = m_pd3dDevice->CreateInputLayout(layout, numLayout,
@@ -145,11 +150,6 @@ bool JDxObject::Create(ID3D11Device* pd3dDevice,	ID3D11DeviceContext* pContext, 
 {
 
 	HRESULT hr;
-	/*m_rtCollision = JRect(m_vPos, m_fWidth, m_fHeight);
-	I_ObjectMgr.AddCollisionExecute(this, std::bind(&JBaseObject::HitOverlap,this,std::placeholders::_1, std::placeholders::_2));
-
-	I_ObjectMgr.AddSelectExecute(this, std::bind(&JBaseObject::HitSelect, this, std::placeholders::_1, std::placeholders::_2));*/
-
 	SetDevice(pd3dDevice, pContext);
 
 	if (szColorFileName != nullptr && !LoadTexture(szColorFileName, szMaskFileName))
@@ -223,6 +223,9 @@ bool	JDxObject::Render()
 	{
 		m_pContext->PSSetShaderResources(1, 1, m_pMaskTex->m_pSRV.GetAddressOf());
 	}
+	m_pContext->GSSetShader(nullptr, NULL, 0);
+	m_pContext->HSSetShader(nullptr, NULL, 0);
+	m_pContext->DSSetShader(nullptr, NULL, 0);
 	if (m_pVShader != nullptr)
 	{
 		m_pContext->VSSetShader(m_pVShader->m_pVertexShader, NULL, 0);
@@ -248,7 +251,8 @@ bool	JDxObject::Render()
 	
 	UINT StartSlot = 0;
 	UINT NumBuffers = 1;
-	UINT pStrides = sizeof(SimpleVertex);
+	//UINT pStrides = sizeof(SimpleVertex);
+	UINT pStrides = sizeof(JVertex);
 	UINT pOffsets = 0;
 	// 1번째 인자 : 어느 그릇에 넣을것 이냐 ?
 	// 2번째 인자 : 버텍스버퍼에 몇개있냐 ? 
@@ -257,6 +261,7 @@ bool	JDxObject::Render()
 	m_pContext->IASetVertexBuffers(StartSlot, NumBuffers, &m_pVertexBuffer, &pStrides, &pOffsets);
 	m_pContext->IASetIndexBuffer(m_pIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
 	m_pContext->VSSetConstantBuffers(0, 1, &m_pConstantBuffer);
+	m_pContext->PSSetConstantBuffers(0, 1, &m_pConstantBuffer);
 
 	m_pContext->IASetPrimitiveTopology(
 		D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST

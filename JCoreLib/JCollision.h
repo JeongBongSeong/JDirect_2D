@@ -1,5 +1,6 @@
 #pragma once
-#include "JVector3.h"
+#include "JMatrix.h"
+
 enum JCollisionResult
 {
 	RECT_OUT = 0,
